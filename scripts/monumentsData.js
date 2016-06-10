@@ -9,7 +9,6 @@ var objects = [];
        result.url = url;
 
        objects.push(result);
-       console.log (objects);
 
    }
     createPoint('Fontanna Neptuna',[54.3486247,18.5830179],"Stojąca od 1633 r. przed Dworem Artusa Fontanna Neptuna jest symbolem Gdańska. Inicjatorem jej powstania był burmistrz Gdańska Bartłomiej Schachmann. Postać Neptuna nawiązuje do związków Gdańska z morzem. Wymodelowali ją Peter Husen i Johann Rogge, a odlana została w 1615 roku w Augsburgu. Autorem projektu całej fontanny był Abraham van den Blocke.","images/neptun.jpg");
