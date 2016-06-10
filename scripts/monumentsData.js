@@ -18,7 +18,7 @@ var objects = [];
 
     createPoint('Dom Uphagena',[54.3493237,18.6471176],"Dom Uphagena stoi przy ul. Długiej 12 i jest jedyną w Gdańsku odtworzoną wraz ze swym wystrojem kamienicą mieszczańską. W końcu XV wieku wzniesiono w tym miejscu budynek murowany, którego relikty znajdują się w piwnicach obecnie istniejącej kamienicy. W następnych wiekach często zmieniali się właściciele posesji a dom uległ licznym przekształceniom. W roku 1775 zakupił go i przebudował Johann Uphagen, kupiec, historyk amator, bibliofil. Po śmierci właściciela kamienica pozostała w rękach rodziny i przetrwała w niemal niezmienionym stanie do początków XX wieku.","images/domuphagena.jpg");
 
-    createPoint('Żuraw',[54.3501241,18,6578039],"To największy dźwig portowy średniowiecznej Europy, jedna z najbardziej charakterystycznych budowli Gdańska. Położony nad Motławą, służył do przeładunku towarów i stawiania masztów na statkach. Pełnił zarazem funkcję bramy miejskiej.", "images/zuraw.jpg");
+    createPoint('Żuraw',[54.3501241,18.6578039],"To największy dźwig portowy średniowiecznej Europy, jedna z najbardziej charakterystycznych budowli Gdańska. Położony nad Motławą, służył do przeładunku towarów i stawiania masztów na statkach. Pełnił zarazem funkcję bramy miejskiej.", "images/zuraw.jpg");
 
     createPoint('Bazylika Mariacka',[54.3498379,18.6510907],"zwana koroną miasta Gdańska to Kościół Wniebowzięcia Najświętszej Marii Panny, największa ceglana, gotycka świątynia w Europie, powstawał 159 lat w kilku etapach w latach 1343-1502. We wnętrzu znajduje się wiele doskonałych dzieł sztuki średniowiecznej i barokowej, m.in. kamienna Pieta z ok. 1410 r., kopia Sądu Ostatecznego namalowanego przez Hansa Memlinga w roku 1472.", "images/bazylikamariacka.jpg");
 
