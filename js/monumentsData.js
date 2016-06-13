@@ -1,6 +1,6 @@
 var objects = [];
 
-   function createPoint(name, position, description, url) {
+   function createPoint(name, position, url, description) {
        var result = Object.create(null);
 
        result.name = name;
