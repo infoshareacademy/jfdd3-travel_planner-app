@@ -34,20 +34,11 @@ $(document).ready(function () {
 
             var startingPoints = coordinates[Math.round(Math.random() * (coordinates.length - 1))];
             coordinates.splice(coordinates.indexOf(startingPoints), 1); // index of item to be removed, 1 number of elements to remove
-                 randomPlaces.push(startingPoints);
+            randomPlaces.push(startingPoints);
         }
 
     }
 
-    // function initMap() {
-    //     var myLatLng = {lat: 54.3466531, lng: 18.6483953};
-    //
-    //     var map = new google.maps.Map(document.getElementById('map'), {
-    //         zoom: 11,
-    //         center: myLatLng
-    //     });
-    //
-    // }
 
     function initialize() {
         var mapProp = {
