@@ -26,15 +26,13 @@ $('form').on('submit', function(event) {
     var distance;
     if ($('#0-way:checked').length === 1) {
         distance = calculateDistance(positionStart,positionEnd);
-        console.log((distance).toFixed(3)+' km');
+        console.log((distance).toFixed(3)+' km, bezpośrednio do celu');
     }
     if ($('#1-way:checked').length === 1) {
         var waypoint;
         objects.forEach(function(object,index) {
             if ((index !== indexOfStart) && (index !== indexOfEnd)){
-                var distance1 = calculateDistance(positionStart,object.position);
-                var distance2 = calculateDistance(object.position,positionEnd);
-                distance = distance1 + distance2;
+                distance = calculateDistance(positionStart,object.position) + calculateDistance(object.position,positionEnd);
                 if (distance < shortestRoute) {
                     shortestRoute = distance;
                     waypoint = object;
@@ -49,10 +47,7 @@ $('form').on('submit', function(event) {
             if ((index !== indexOfStart) && (index !== indexOfEnd)){
                 objects.forEach(function(object2,index2) {
                     if ((index2 !== indexOfStart) && (index2 !== indexOfEnd) && (index2 !== index)) {
-                        var distance1 = calculateDistance(positionStart,object.position);
-                        var distance2 = calculateDistance(object.position, object2.position);
-                        var distance3 = calculateDistance(object2.position,positionEnd);
-                        distance = distance1 + distance2 + distance3;
+                        distance = calculateDistance(positionStart,object.position) + calculateDistance(object.position, object2.position) + calculateDistance(object2.position,positionEnd);
                         if (distance < shortestRoute) {
                             shortestRoute = distance;
                             waypoint1 = object;
