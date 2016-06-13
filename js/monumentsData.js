@@ -8,7 +8,6 @@ var objects = [];
        result.url = url;
        result.description = description;
 
-
        objects.push(result);
 
    }
