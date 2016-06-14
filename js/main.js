@@ -5,6 +5,7 @@ function calculateDistance(firstPoint, secondPoint){
 objects.forEach(function(monument) {
     $('body').append($('<div>').text(monument.name))
 });
+
 $('form').on('submit', function(event) {
     event.preventDefault();
     var positionStart, positionEnd, indexOfStart, indexOfEnd;

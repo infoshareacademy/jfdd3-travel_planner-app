@@ -20,7 +20,6 @@ function initMap() {
                 '<p>' + objects[i].description + '</p>' + '</div>');
         }
 
-    console.log(infoWindowContent);
 
     for (i = 0; i < objects.length; i++) {
 
