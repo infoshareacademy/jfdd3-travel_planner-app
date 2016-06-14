@@ -17,9 +17,9 @@ function initMap() {
                 '<h3>' + objects[i].name + '</h3>' +
                 '</br>' +
                 '<img src=' + objects[i].url +  '>' +
-                '<button type="button" id="infoWindowBtnStart"> ' +
+                '<button type="button" class="infoWindowBtnStart" id="'+objects[i].name+'"> ' +
                 "Początek trasy" + '</button>' + 
-                '<button type="button" id="infoWindowBtnEnd">' +
+                '<button type="button" class="infoWindowBtnEnd" id="'+objects[i].name+'">' +
                 "Koniec trasy" + '</button>' +
                 '<p>' + objects[i].description + '</p>' + '</div>');
         }
@@ -42,6 +42,12 @@ function initMap() {
             return function() {
                 infowindow.setContent(infoWindowContent[i]);
                 infowindow.open(map, marker);
+                $('.infoWindowBtnStart').on('click', function(){
+                    $('#startPointDropdownMenu').text($(this).attr('id'));
+                });
+                $('.infoWindowBtnEnd').on('click', function(){
+                    $('#endPointDropdownMenu').text($(this).attr('id'));
+                });
             }
         })(marker, i));
 

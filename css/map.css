@@ -3,12 +3,12 @@
     height: 1000px;
 }
 
-#infoWindowBtnStart {
+.infoWindowBtnStart {
     position:absolute;
     margin-left: 49%;
 }
 
-#infoWindowBtnEnd {
+.infoWindowBtnEnd {
     position:absolute;
     margin-left: 51%;
     margin-top: 7%;
