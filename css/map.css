@@ -2,3 +2,14 @@
     width: 100%;
     height: 1000px;
 }
+
+#infoWindowBtnStart {
+    position:absolute;
+    margin-left: 49%;
+}
+
+#infoWindowBtnEnd {
+    position:absolute;
+    margin-left: 51%;
+    margin-top: 7%;
+}
