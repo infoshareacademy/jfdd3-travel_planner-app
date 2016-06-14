@@ -13,10 +13,14 @@ function initMap() {
     var infoWindowContent = [];
 
     for (i = 0; i < objects.length; i++) {
-                infoWindowContent.push('<br class="info_content">' +
+                infoWindowContent.push('<div class="info_content">' +
                 '<h3>' + objects[i].name + '</h3>' +
                 '</br>' +
                 '<img src=' + objects[i].url +  '>' +
+                '<button type="button" id="infoWindowBtnStart"> ' +
+                "Początek trasy" + '</button>' + 
+                '<button type="button" id="infoWindowBtnEnd">' +
+                "Koniec trasy" + '</button>' +
                 '<p>' + objects[i].description + '</p>' + '</div>');
         }
 
@@ -24,13 +28,15 @@ function initMap() {
     for (i = 0; i < objects.length; i++) {
 
 
-        var position = new google.maps.LatLng(objects[i].position[0], objects[i].position[1]);
-        bounds.extend(position);
-        marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            animation: google.maps.Animation.DROP
-        });
+            var position = new google.maps.LatLng(objects[i].position[0], objects[i].position[1]);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                animation: google.maps.Animation.DROP
+            });
+
+
 
         google.maps.event.addListener(marker, 'click', (function(marker, i) {
             return function() {
