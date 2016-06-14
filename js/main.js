@@ -2,6 +2,9 @@ function calculateDistance(firstPoint, secondPoint){
     return Math.sqrt(Math.pow((firstPoint[0] - secondPoint[0])*112.23, 2) + Math.pow((firstPoint[1] - secondPoint[1])*65.522, 2))
 }
 
+objects.forEach(function(monument) {
+    $('body').append($('<div>').text(monument.name))
+});
 $('form').on('submit', function(event) {
     event.preventDefault();
     var positionStart, positionEnd, indexOfStart, indexOfEnd;
