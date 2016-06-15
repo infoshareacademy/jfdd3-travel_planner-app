@@ -11,18 +11,14 @@ function initMap() {
 
     infowindow = new google.maps.InfoWindow({
         pixelOffset: new google.maps.Size(-25, 0),
-        maxWidth: 342
+        maxWidth: 392
     });
 
     google.maps.event.addListener(infowindow, 'domready', function () {
         $('.info_content').closest('.gm-style-iw').parent().addClass('custom-iw');
-        $(".gm-style-iw").next("div").css({
-            opacity: '1', // by default the close button has an opacity of 0.7
-            right: '38px', top: '3px', // button repositioning
-            border: '7px solid #48b5e9', // increasing button border and new color
-            'border-radius': '13px', // circular effect
-            'box-shadow': '0 0 5px #3990B9' // 3D effect to highlight the button
-        });
+
+        // });
+        // $('.gm-style-iw').prev().html('');
 
     });
 
