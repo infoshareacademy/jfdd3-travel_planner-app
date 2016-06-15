@@ -3,22 +3,30 @@
 var map;
 var infowindow;
 var markers = [];
+var directionsService;
+var directionsDisplay;
+var waypts;
+
+
 
 function initMap() {
+
+
     var bounds = new google.maps.LatLngBounds();
 
-    map = new google.maps.Map(document.getElementById('map'));
+    map = new google.maps.Map(document.getElementById('map'), {
+        disableDefaultUI: true
+    });
+
 
     infowindow = new google.maps.InfoWindow({
         pixelOffset: new google.maps.Size(-25, 0),
-        maxWidth: 392
+        maxWidth: 392,
     });
+
 
     google.maps.event.addListener(infowindow, 'domready', function () {
         $('.info_content').closest('.gm-style-iw').parent().addClass('custom-iw');
-
-        // });
-        // $('.gm-style-iw').prev().html('');
 
     });
 
@@ -26,10 +34,10 @@ function initMap() {
     var infoWindowContent = [];
 
 
-    // Automatically center the map, fitting all markers on the screen
+// Automatically center the map, fitting all markers on the screen
     map.fitBounds(bounds);
 
-    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+// Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
     var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
         this.setZoom(16);
         google.maps.event.removeListener(boundsListener);
@@ -64,6 +72,8 @@ function initMap() {
 
         var position = new google.maps.LatLng(objects[i].position[0], objects[i].position[1]);
         bounds.extend(position);
+
+
         marker = new google.maps.Marker({
             position: position,
             map: map,
@@ -72,7 +82,6 @@ function initMap() {
         });
 
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
-            $('info-content').closest('.gm-style-iw').parent().addClass('custom-iw');
             return function () {
                 infowindow.setContent(infoWindowContent[i]);
                 infowindow.open(map, marker);
@@ -86,18 +95,84 @@ function initMap() {
                     $('#endPointDropdownMenu').text($(this).attr('id'));
                 });
 
-                //adds toggle bounce to marker on click
-                if (marker.getAnimation() !== null) {
-                    marker.setAnimation(null);
-                } else {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                }
+                // //adds toggle bounce to marker on click
+                // if (marker.getAnimation() !== null) {
+                //     marker.setAnimation(null);
+                // } else {
+                //     marker.setAnimation(google.maps.Animation.BOUNCE);
+                // }
             }
         })(marker, i));
         //Add new marker to list of markers (to keep track of them)
         markers.push(marker);
     }
+
+    //add event listener for oblicz trase button
+    $('#btnShowMeTheWay').on('click', function () {
+        initRoute();
+
+        console.log('click');
+    });
 }
+
+function initRoute() {
+
+    //direction services
+    directionsService = new google.maps.DirectionsService;
+    directionsDisplay = new google.maps.DirectionsRenderer;
+
+    //set direction service for map
+    directionsDisplay.setMap(map);
+
+    calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        waypts = [];
+        for (var i = 0; i < walkingRoute.length; i++) {
+            waypts.push({
+                // location: new google.maps.LatLng({lat: parseFloat(objects[walkingRoute[i].id].position[0]), lng: parseFloat(objects[walkingRoute[i].id].position[1])}),
+                location: ""+ objects[walkingRoute[i].id].position[0] + "," + objects[walkingRoute[i].id].position[1],
+                stopover: true
+            });
+        }
+    }
+
+    directionsService.route({
+        origin: "" + objects[startPosition].position[0] + ","  +  objects[startPosition].position[1],
+        destination: "" + objects[endPosition].position[0] + ","  +  objects[endPosition].position[1],
+        // origin: "" + objects[startPosition].position[0] + ","  +  objects[startPosition].position[1],
+        // destination: "" + objects[endPosition].position[0] + "," + objects[endPosition].position[1],
+        waypoints: waypts,
+        // optimizeWaypoints: true,
+        travelMode: google.maps.TravelMode.WALKING
+    }, function (response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+            // var walkingRoute = response.routes[0];
+            // var summaryPanel = document.getElementById('directions-panel');
+            // summaryPanel.innerHTML = '';
+            // // For each walkingRoute, display summary information.
+            // for (var i = 0; i < walkingRoute.legs.length; i++) {
+            //     var routeSegment = i + 1;
+            //     summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+            //         '</b><br>';
+            //     summaryPanel.innerHTML += walkingRoute.legs[i].start_address + ' to ';
+            //     summaryPanel.innerHTML += walkingRoute.legs[i].end_address + '<br>';
+            //     summaryPanel.innerHTML += walkingRoute.legs[i].distance.text + '<br><br>';
+            // }
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+    // czyszczenie tablic po wyliczeniu tablic - tymczasowy kod
+    // waypts = [];
+    // walkingRoute = [];
+}
+
+
+
+
 
 
 
