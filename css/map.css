@@ -3,13 +3,98 @@
     height: 1000px;
 }
 
+.infoWindowButtons {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
 .infoWindowBtnStart {
-    position:absolute;
-    margin-left: 49%;
+    margin-bottom: 1%;
+
 }
 
 .infoWindowBtnEnd {
-    position:absolute;
-    margin-left: 51%;
-    margin-top: 7%;
+    margin-bottom: 1%;
+
 }
+
+.info_content {
+    position: relative;
+    width: 350px;
+    height: 400px;
+    padding: 10px;
+}
+
+.info_content h3 {
+    text-align: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 10px;
+    background-color: #e8bf2a;
+    color: white;
+    margin: 1px;
+    border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */
+}
+
+
+.info_content p {
+    padding: 1%;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.info_content img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.custom-iw .gm-style-iw {
+    top:15px !important;
+    left:0 !important;
+    border-radius:2px;
+}
+.custom-iw>div:first-child>div:nth-child(2) {
+    display:none;
+}
+.custom-iw .gm-style-iw, .custom-iw .gm-style-iw>div, .custom-iw .gm-style-iw>div>div {
+    width:100% !important;
+    max-width:100% !important;
+}
+/** set here the width **/
+.custom-iw, .custom-iw>div:first-child>div:last-child {
+    width:339px !important;
+    height: 100%;
+}
+.custom-iw>div:first-child>div:last-child {
+    left:0 !important;
+    top:0px;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 6px;
+    z-index:-1 !important;
+}
+/** set here the desired background-color **/
+#info_content, .custom-iw>div:first-child>div:nth-child(n-1)>div>div, .custom-iw>div>div:last-child, .custom-iw .gm-style-iw, .custom-iw .gm-style-iw>div, .custom-iw .gm-style-iw>div>div {
+    background-color:white !important;
+}
+/** close-button **/
+.custom-iw>div:last-child {
+    top:7px !important;
+    right:0 !important;
+    width: 25px !important;
+    height: 25px !important;
+    opacity: 1 !important;
+    border: 7px solid #23b5b2 !important;;
+    border-radius: 13px !important;;
+    box-shadow: 0 0 5px #3990B9 !important;;
+
+
+}
+/** padding of the content **/
+#div-main-infoWindow {
+    padding:6px;
+}
+
