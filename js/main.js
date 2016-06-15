@@ -1,62 +1,46 @@
-function calculateDistance(firstPoint, secondPoint){
-    return Math.sqrt(Math.pow((firstPoint[0] - secondPoint[0])*112.23, 2) + Math.pow((firstPoint[1] - secondPoint[1])*65.522, 2))
-}
+'use strict';
 
-objects.forEach(function(monument) {
-    $('body').append($('<div>').text(monument.name))
-});
-$('form').on('submit', function(event) {
-    event.preventDefault();
-    var positionStart, positionEnd, indexOfStart, indexOfEnd;
-    var shortestRoute = 100;
-    objects.forEach(function(object) {
-        if (object.name == $('#start').val()) {
-            positionStart = object.position;
-            indexOfStart = objects.indexOf(object);
-        }
-    });
-    objects.forEach(function(object) {
-        if (object.name == $('#end').val()) {
-            positionEnd = object.position;
-            indexOfEnd = objects.indexOf(object);
-        }
-    });
-    console.log(positionStart);
-    console.log(positionEnd);
-    var distance;
-    if ($('#0-way:checked').length === 1) {
-        distance = calculateDistance(positionStart,positionEnd);
-        console.log((distance).toFixed(3)+' km, bezpośrednio do celu');
-    }
-    if ($('#1-way:checked').length === 1) {
-        var waypoint;
-        objects.forEach(function(object,index) {
-            if ((index !== indexOfStart) && (index !== indexOfEnd)){
-                distance = calculateDistance(positionStart,object.position) + calculateDistance(object.position,positionEnd);
-                if (distance < shortestRoute) {
-                    shortestRoute = distance;
-                    waypoint = object;
-                }
+$(document).ready(function() {
+    var startPosition, endPosition;
+
+    $('#btnShowMeTheWay').on('click',function(){
+
+        objects.forEach(function(object){
+           if ($('#startPointDropdownMenu').text() === object.name) {
+               startPosition = object.id;
+           }
+            if ($('#endPointDropdownMenu').text() === object.name) {
+                endPosition = object.id;
             }
         });
-        console.log((distance).toFixed(3)+' km przez: '+waypoint.name);
-    }
-    if ($('#2-way:checked').length ===1) {
-        var waypoint1, waypoint2;
-        objects.forEach(function(object,index) {
-            if ((index !== indexOfStart) && (index !== indexOfEnd)){
-                objects.forEach(function(object2,index2) {
-                    if ((index2 !== indexOfStart) && (index2 !== indexOfEnd) && (index2 !== index)) {
-                        distance = calculateDistance(positionStart,object.position) + calculateDistance(object.position, object2.position) + calculateDistance(object2.position,positionEnd);
-                        if (distance < shortestRoute) {
-                            shortestRoute = distance;
-                            waypoint1 = object;
-                            waypoint2 = object2;
+
+        if (startPosition !== endPosition) {
+
+            var i = 0;
+            var route = [{id: startPosition, moves: [startPosition]}];
+            var end = objects[endPosition];
+            var foundEnd = false;
+
+            while (foundEnd === false) {
+                var idPoint = route[i].id;
+                objects[idPoint].siblings.forEach(function (sibling) {
+                    if ((route[i].moves.some(function (item) {return sibling === item}) === false) && (foundEnd === false)) {
+                        var object = {};
+                        object.id = sibling;
+                        object.moves = route[i].moves.slice();
+                        object.moves.push(sibling);
+                        route.push(object);
+                        if (object.id === end.id) {
+                            foundEnd = true;
                         }
                     }
-                })
+                });
+                i++;
             }
-        });
-        console.log((distance).toFixed(3)+' km przez: '+waypoint1.name+', a następnie: '+waypoint2.name);
-    }
+            console.info('Twoja trasa z: '+objects[startPosition].name+' do: '+objects[endPosition].name);
+            route[route.length - 1].moves.forEach(function(move){
+                console.log(objects[move].name);
+            });
+        }
+    })
 });
