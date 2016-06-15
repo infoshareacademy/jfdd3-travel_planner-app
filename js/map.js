@@ -18,7 +18,7 @@ function initMap() {
                 '</br>' +
                 '<img src=' + objects[i].url +  '>' +
                 '<button type="button" class="infoWindowBtnStart" id="'+objects[i].name+'"> ' +
-                "Początek trasy" + '</button>' + 
+                "Początek trasy" + '</button>' +
                 '<button type="button" class="infoWindowBtnEnd" id="'+objects[i].name+'">' +
                 "Koniec trasy" + '</button>' +
                 '<p>' + objects[i].description + '</p>' + '</div>');
@@ -28,13 +28,13 @@ function initMap() {
     for (i = 0; i < objects.length; i++) {
 
 
-            var position = new google.maps.LatLng(objects[i].position[0], objects[i].position[1]);
-            bounds.extend(position);
-            marker = new google.maps.Marker({
-                position: position,
-                map: map,
-                animation: google.maps.Animation.DROP
-            });
+        var position = new google.maps.LatLng(objects[i].position[0], objects[i].position[1]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            animation: google.maps.Animation.DROP
+        });
 
 
 
