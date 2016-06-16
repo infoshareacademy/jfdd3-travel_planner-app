@@ -11,9 +11,11 @@ $(document).ready(function() {
     if ($('#changeViewsdsd').text() === 'Mapa') {
         $('#map').show();
         $('#kafle').hide();
+        $('.cont').css({'overflow': 'hidden'});
     } else {
         $('#map').hide();
         $('#kafle').show();
+        $('.cont').css({'overflow': 'auto'});
     }
     });
 
