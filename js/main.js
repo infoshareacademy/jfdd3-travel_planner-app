@@ -62,11 +62,11 @@ $(document).ready(function() {
         objects.forEach(function (object) {
             var $img = $('<img>').attr('src',object.url);
             var $p = $('<p>').addClass('card-text').text(object.name);
-            var $h4 = $('<h4>').addClass('card-title').text(object.name);
+            var $h4 = $('<h5>').addClass('card-title').text(object.name);
             var $div3 = $('<div>').addClass('card-block').append($p);
             var $div2 = $('<div>').addClass('card-block').append($h4);
             var $div = $('<div>').addClass('card');
-            $div.append($div2).append($img).append($div3);
+            $div.append($img).append($div2).append($div3);
             $('#kafle').append($div);
         });
     })();

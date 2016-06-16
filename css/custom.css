@@ -1,13 +1,16 @@
-
 /* GENERAL STYLES
 -------------------------------------------------*/
 body {
-    font-family:'Lato', sans-serif;
-    font-size:1em;
-    color:#777;
-    font-weight:300;
-    line-height:1.7;
-    overflow-x:hidden;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1em;
+    color: #777;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+}
+
+.cont {
+    background-color: #E4E4E4;
 }
 
 .main-container {
@@ -15,44 +18,73 @@ body {
     height: 850px;
 }
 
-
 #logo {
     width: 100%;
     height: 100%;
 }
 
 .btn-primary {
-    background-color: rgb(35,181,178);
-    border-color: rgb(35,181,178);
+    background-color: rgb(35, 181, 178);
+    border-color: rgb(35, 181, 178);
 }
 
 .btn:hover {
-    background-color: rgb(238,186, 76);
+    background-color: rgb(238, 186, 76);
     border-color: rgb(238, 186, 76);
 
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background-color: rgb(238,186, 76);
+    background-color: rgb(238, 186, 76);
     border-color: rgb(238, 186, 76);
 }
 
 .dropdown-item:hover {
-    background-color: rgb(238,186, 76);
+    background-color: rgb(238, 186, 76);
 }
 
 .groupped-menu {
     margin-top: 2%;
 }
+
 .card {
+    background-color: white;
     max-width: 180px;
     margin: 10px;
+    border: none;
+    border-radius: 5px;
+    overflow: hidden;
 }
+
+.card-title {
+    padding-top: 10px;
+    width: 100%;
+    /*line-height: 35px;*/
+    text-align: center;
+    color: #23b5b2;
+
+}
+
+.card-text {
+    text-align: center;
+    color: #000;
+    display: none
+;
+}
+
+.card-block {
+    padding: 0 0 0 0;
+}
+
+
 #kafle {
     display: flex;
     flex-wrap: wrap;
     max-width: 100%;
+    background-color: #e4e4e4;
+
 }
+
 .card img {
     max-width: 100%;
 }
