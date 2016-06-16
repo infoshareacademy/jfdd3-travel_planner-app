@@ -53,7 +53,6 @@ $(document).ready(function() {
                 });
                 i++;
             }
-            console.info('Twoja trasa z: '+objects[startPosition].name+' do: '+objects[endPosition].name);
             walkingRoute2 = walkingRoute[walkingRoute.length - 1].moves;
         }
     });
@@ -79,8 +78,20 @@ $(document).ready(function() {
 
     });
 
-    $('#infoWindow').on('click', function(){
+    $('span', '#infoWindow').on('click', function(){
         $('#infoWindow').css({'width': '0', 'height': '0'});
     });
+
+    $('span', '#routeWindow').on('click', function(){
+        $('#routeWindow').css({'width': '0', 'height': '0'});
+    });
+
+    $('#btnStartInfo').on('click', function() {
+        $('#startPointDropdownMenu').text($('#infoWindow').find('h5').text());
+    });
+
+    $('#btnEndInfo').on('click', function() {
+        $('#endPointDropdownMenu').text($('#infoWindow').find('h5').text());
+    })
 
 });

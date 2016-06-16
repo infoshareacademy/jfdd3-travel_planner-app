@@ -116,10 +116,14 @@ function initMap() {
 
     //add event listener for oblicz trase button
     $('#btnShowMeTheWay').on('click', function () {
+        walkingRoute2.forEach(function(item){
+            $('#routeWindow').append($('<p>').text(objects[item].name));
+        });
         initRoute();
         $('#map').show();
         $('#kafle').hide();
-        $('#changeViewsdsd').text('Mapa')
+        $('#changeViewsdsd').text('Mapa');
+        $('#routeWindow').css({'width': '25%', 'height': '40%'});
     });
 }
 

@@ -90,6 +90,24 @@ main {
 .card img {
     max-width: 100%;
 }
+
+#routeWindow {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 0;
+    height: 0;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(228, 228, 228, 0.9);
+    transition: width 2s, height 2s;
+    border: 1px solid #23b5b2;
+    border-radius: 10px;
+    overflow: hidden;
+    color: #23b5b2;
+}
+
 #infoWindow {
     position: absolute;
     display: flex;
@@ -106,6 +124,10 @@ main {
     overflow: hidden;
     color: #23b5b2;
 }
+#infoWindow span, #routeWindow span {
+    align-self: flex-end;
+    padding: 0 10px 0;
+}
 #infoWindow h5 {
     align-self: center;
 }
@@ -116,4 +138,11 @@ main {
     width: 40%;
     height: 40%;
     align-self: center;
+}
+#infoWindow button {
+    width: 40%;
+}
+.infoWindowBottom {
+    display: flex;
+    justify-content: space-around;
 }
