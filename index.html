@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>TravelPlanner</title>
 
@@ -30,57 +30,51 @@
 </head>
 <body ng-app="travelPlanner" ng-controller="changeView">
 <!-- Navigation -->
-<nav class="navbar navbar-light bg-faded">
-    <div class="nav navbar-nav pull-right">
-        <div class="groupped-menu">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt startowy
-                </button>
-                <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
+<div class="cont">
+    <nav class="navbar navbar-light bg-faded">
+        <div class="nav navbar-nav pull-right">
+            <div class="groupped-menu">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt startowy
+                    </button>
+                    <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
 
+                    </div>
                 </div>
-            </div>
 
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt końcowy
-                </button>
-                <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu"></div>
-            </div>
-            <div>
-                <button class="btn btn-primary" type="button" id="btnShowMeTheWay">Wyznacz trasę</button>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">NAPRAW MNIE
-                </button>
-                <div class="dropdown-menu" id="changeView" aria-labelledby="changeView">
-
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt końcowy
+                    </button>
+                    <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu"></div>
                 </div>
+                <div>
+                    <button class="btn btn-primary" type="button" id="btnShowMeTheWay">Wyznacz trasę</button>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Zmień widok
+                    </button>
+                    <div class="dropdown-menu" id="changeView" aria-labelledby="changeView">
+
+                    </div>
+                </div>
+
             </div>
+        </div>
+        <div class="nav navbar-nav pull-left">
+            <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner"> </a>
+        </div>
+    </nav>
+    <!-- Main -->
+    <main>
+        <div id="map" ng-show="showMap"></div>
+        <div id="kafle" ng-hide="showMap">
 
         </div>
-    </div>
-    <div class="nav navbar-nav pull-left">
-        <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner"> </a>
-    </div>
-</nav>
-<!-- Main -->
-<main>
-    <div id="map" ng-show="showMap"></div>
-    <div id="kafle" ng-hide="showMap">
-
-    </div>
-</main>
-
-
-
-<!-- Footer -->
-
-<footer>
-
-</footer>
+    </main>
+</div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-2.2.4.min.js"></script>

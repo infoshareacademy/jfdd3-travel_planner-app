@@ -21,7 +21,7 @@ function initMap() {
 
     infowindow = new google.maps.InfoWindow({
         pixelOffset: new google.maps.Size(-25, 0),
-        maxWidth: 392,
+        maxWidth: 392
     });
 
 
@@ -110,8 +110,6 @@ function initMap() {
     //add event listener for oblicz trase button
     $('#btnShowMeTheWay').on('click', function () {
         initRoute();
-
-        console.log('click');
     });
 }
 
