@@ -92,6 +92,9 @@ main {
 }
 #infoWindow {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 0;
     height: 0;
     top: 10px;
@@ -101,4 +104,16 @@ main {
     border: 1px solid #23b5b2;
     border-radius: 10px;
     overflow: hidden;
+    color: #23b5b2;
+}
+#infoWindow h5 {
+    align-self: center;
+}
+#infoWindow p {
+    padding: 10px;
+}
+#infoWindow img {
+    width: 40%;
+    height: 40%;
+    align-self: center;
 }

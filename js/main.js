@@ -11,11 +11,11 @@ $(document).ready(function() {
     if ($('#changeViewsdsd').text() === 'Mapa') {
         $('#map').show();
         $('#kafle').hide();
-        $('.cont').css({'overflow': 'hidden'});
+        // $('.cont').css({'overflow': 'hidden'});
     } else {
         $('#map').hide();
         $('#kafle').show();
-        $('.cont').css({'overflow': 'auto'});
+       //  $('.cont').css({'overflow': 'auto'});
     }
     });
 
@@ -65,20 +65,17 @@ $(document).ready(function() {
             var $h4 = $('<h5>').addClass('card-title').text(object.name);
             var $div3 = $('<div>').addClass('card-block').append($p);
             var $div2 = $('<div>').addClass('card-block').append($h4);
-            var $div = $('<div>').addClass('card');
+            var $div = $('<div>').addClass('card').attr('id',object.id);
             $div.append($img).append($div2).append($div3);
             $('#kafle').append($div);
         });
     })();
 
     $('.card').on('click', function(){
-        $('#infoWindow').css({'width': '790px', 'height': '500px'});
-        objects.forEach(function(object) {
-            if ($('h4', this).text() === object.name) {
-                console.log($('h4', this).text());
-                startPosition = object.id;
-            }
-        });
+        $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto'});
+        $('h5', '#infoWindow').text(objects[$(this).attr('id')].name);
+        $('p', '#infoWindow').text(objects[$(this).attr('id')].description);
+        $('img', '#infoWindow').attr('src',objects[$(this).attr('id')].url);
 
     });
 
