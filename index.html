@@ -28,7 +28,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-app="travelPlanner" ng-controller="changeView">
+<body>
 <!-- Navigation -->
 <div class="cont">
     <nav class="navbar navbar-light bg-faded">
@@ -69,10 +69,8 @@
     </nav>
     <!-- Main -->
     <main>
-        <div id="map" ng-show="showMap"></div>
-        <div id="kafle" ng-hide="showMap">
-
-        </div>
+        <div id="map"></div>
+        <div id="kafle"></div>
     </main>
 </div>
 
@@ -89,7 +87,5 @@
 <script src="js/main.js"></script>
 <script src="js/menu.js"></script>
 <script src="js/map.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="js/app.js"></script>
 </body>
 </html>

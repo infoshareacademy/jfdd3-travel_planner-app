@@ -5,6 +5,17 @@ var walkingRoute2 = [];
 
 $(document).ready(function() {
 
+    $('#kafle').hide();
+
+    $('#changeView').on('click', function(){
+    if ($('#changeViewsdsd').text() === 'Mapa') {
+        $('#map').show();
+        $('#kafle').hide();
+    } else {
+        $('#map').hide();
+        $('#kafle').show();
+    }
+    });
 
     $('#btnShowMeTheWay').on('click', function () {
 

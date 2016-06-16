@@ -110,6 +110,9 @@ function initMap() {
     //add event listener for oblicz trase button
     $('#btnShowMeTheWay').on('click', function () {
         initRoute();
+        $('#map').show();
+        $('#kafle').hide();
+        $('#changeViewsdsd').text('Mapa')
     });
 }
 

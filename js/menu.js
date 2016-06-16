@@ -16,8 +16,8 @@ function generateEndMenu() {
     });
 }
 function generateViewMenu() {
-    $('#changeView').append($('<button>').addClass('dropdown-item view-item').attr('ng-click','changeViewMode(true)').text('Mapa'));
-    $('#changeView').append($('<button>').addClass('dropdown-item view-item').attr('ng-click','changeViewMode(false)').text('Kafelki'));
+    $('#changeView').append($('<button>').addClass('dropdown-item view-item').text('Mapa'));
+    $('#changeView').append($('<button>').addClass('dropdown-item view-item').text('Kafelki'));
 
 }
 
