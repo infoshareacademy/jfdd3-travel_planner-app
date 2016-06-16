@@ -39,7 +39,7 @@ function initMap() {
 
 // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
     var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
-        this.setZoom(16);
+        this.setZoom(17);
         google.maps.event.removeListener(boundsListener);
     });
 
