@@ -107,6 +107,13 @@ function initMap() {
         markers.push(marker);
     }
 
+    //direction services
+    directionsService = new google.maps.DirectionsService;
+    directionsDisplay = new google.maps.DirectionsRenderer;
+
+    //set direction service for map
+    directionsDisplay.setMap(map);
+
     //add event listener for oblicz trase button
     $('#btnShowMeTheWay').on('click', function () {
         initRoute();
@@ -115,12 +122,7 @@ function initMap() {
 
 function initRoute() {
 
-    //direction services
-    directionsService = new google.maps.DirectionsService;
-    directionsDisplay = new google.maps.DirectionsRenderer;
 
-    //set direction service for map
-    directionsDisplay.setMap(map);
 
     calculateAndDisplayRoute(directionsService, directionsDisplay);
 
