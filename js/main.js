@@ -71,4 +71,19 @@ $(document).ready(function() {
         });
     })();
 
+    $('.card').on('click', function(){
+        $('#infoWindow').css({'width': '790px', 'height': '500px'});
+        objects.forEach(function(object) {
+            if ($('h4', this).text() === object.name) {
+                console.log($('h4', this).text());
+                startPosition = object.id;
+            }
+        });
+
+    });
+
+    $('#infoWindow').on('click', function(){
+        $('#infoWindow').css({'width': '0', 'height': '0'});
+    });
+
 });
