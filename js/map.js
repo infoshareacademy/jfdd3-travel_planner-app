@@ -129,10 +129,9 @@ function initRoute() {
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         waypts = [];
-        for (var i = 0; i < walkingRoute.length; i++) {
+        for (var i = 1; i < walkingRoute2.length-1; i++) {
             waypts.push({
-                // location: new google.maps.LatLng({lat: parseFloat(objects[walkingRoute[i].id].position[0]), lng: parseFloat(objects[walkingRoute[i].id].position[1])}),
-                location: ""+ objects[walkingRoute[i].id].position[0] + "," + objects[walkingRoute[i].id].position[1],
+                location: ""+ objects[walkingRoute2[i]].position[0] + "," + objects[walkingRoute2[i]].position[1],
                 stopover: true
             });
         }
@@ -149,6 +148,7 @@ function initRoute() {
     }, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
+            // this part print out route steps
             // var walkingRoute = response.routes[0];
             // var summaryPanel = document.getElementById('directions-panel');
             // summaryPanel.innerHTML = '';
@@ -166,8 +166,8 @@ function initRoute() {
         }
     });
     // czyszczenie tablic po wyliczeniu tablic - tymczasowy kod
-    // waypts = [];
-    // walkingRoute = [];
+    waypts = [];
+    walkingRoute2 = [];
 }
 
 

@@ -1,6 +1,7 @@
 'use strict';
 var startPosition, endPosition;
 var walkingRoute = [];
+var walkingRoute2 = [];
 
 $(document).ready(function() {
     
@@ -40,9 +41,7 @@ $(document).ready(function() {
                 i++;
             }
             console.info('Twoja trasa z: '+objects[startPosition].name+' do: '+objects[endPosition].name);
-            walkingRoute[walkingRoute.length - 1].moves.forEach(function(move){
-                console.log(objects[move].name);
-            });
+            walkingRoute2 = walkingRoute[walkingRoute.length - 1].moves;
         }
     })
 });
