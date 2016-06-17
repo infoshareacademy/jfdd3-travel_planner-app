@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="753860027871-kkasoe6ohmrqohc0rvva5sip79ih0ht1.apps.googleusercontent.com">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>TravelPlanner</title>
 
@@ -28,12 +29,18 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-controller="TravelCtrl">
 <!-- Navigation -->
 <div class="cont">
     <nav class="navbar navbar-light bg-faded">
         <div class="nav navbar-nav pull-right">
             <div class="groupped-menu">
+                <p></p>
+                <p></p>
+                {{signedIn}}
+                <div class="g-signin2" ng-hide="signedIn" data-onsuccess="onSignIn"></div>
+                <a href="#" ng-click="signOut()" ng-show="signedIn">Sign out</a>
+
                 <div class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt startowy
@@ -87,11 +94,15 @@
 
 <!--new key -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=initMap" async defer></script>
+<script src="js/gapi.js"></script>
+
 <script src="js/monumentsData.js"></script>
 <script src="js/main.js"></script>
 <script src="js/menu.js"></script>
 <script src="js/map.js"></script>
+<script src="js/google-sing-in.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="js/app.js"></script>
+
 </body>
 </html>
