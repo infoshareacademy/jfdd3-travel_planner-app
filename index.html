@@ -28,7 +28,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-controller="travelCtrl">
 <!-- Navigation -->
 <div class="cont">
     <nav class="navbar navbar-light bg-faded">
@@ -70,9 +70,8 @@
     <!-- Main -->
     <main>
         <div id="map"></div>
-        <div id="kafle"></div>
-        <div id="infoWindow"><span>X</span><img><h5></h5><p></p><div class="infoWindowBottom"><button class="btn btn-primary" id="btnStartInfo">Ustaw jako punkt startowy</button>
-            <button class="btn btn-primary" id="btnEndInfo">Ustaw jako punkt końcowy</button></div>
+        <div id="kafle"><div id="dropS"></div><div id="dropE"></div><div id="drag"></div></div>
+        <div id="infoWindow"><span>X</span><img><h5></h5><p></p></div>
         </div>
         <div id="routeWindow"><span>X</span></div>
     </main>
@@ -80,6 +79,7 @@
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-2.2.4.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <!--old key-->

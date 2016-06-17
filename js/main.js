@@ -5,11 +5,42 @@ var walkingRoute2 = [];
 
 $(document).ready(function() {
 
-    $('#kafle').hide();
+    $('#map').hide();
+
+    $('#drag').sortable({
+        connectWith: "#dropS, #dropE"
+    });
+    $('#dropS').sortable({
+        connectWith: "#drag",
+        items: "> .card",
+        receive: function () {
+            $('#dropS').find('.dropplace').hide();
+            $('#startPointDropdownMenu').text(objects[$('#dropS').find('.card').attr('id')].name);
+        },
+        start: function () {
+            $('#dropS').find('.dropplace').show();
+            $('#startPointDropdownMenu').text('Punkt startowy');
+
+        }
+    });
+    $('#dropE').sortable({
+        connectWith: "#drag",
+        items: "> .card",
+        receive: function() {
+            $('#dropE').find('.dropplace').hide();
+            $('#endPointDropdownMenu').text(objects[$('#dropE').find('.card').attr('id')].name);
+        },
+        start: function(){
+            $('#dropE').find('.dropplace').show();
+
+        }
+    });
+
 
     $('#changeView').on('click', function(){
     if ($('#changeViewsdsd').text() === 'Mapa') {
         $('#map').show();
+        initiMap();
         $('#kafle').hide();
         $('.cont').css({'overflow': 'hidden'});
         $('#infoWindow').css({'width': '0', 'height': '0'});
@@ -61,6 +92,8 @@ $(document).ready(function() {
     });
 
     (function() {
+        $('#dropS').append($('<div>').addClass('dropplace').text('Przeciągnij element, który chcesz ustawić jako punkt startowy'));
+        $('#dropE').append($('<div>').addClass('dropplace').text('Przeciągnij element, który chcesz ustawić jako punkt końcowy'));
         objects.forEach(function (object) {
             var $img = $('<img>').attr('src',object.url);
             var $img1 = $('<div>').addClass('infoMarker');
@@ -70,11 +103,11 @@ $(document).ready(function() {
             var $div2 = $('<div>').addClass('card-block').append($h4);
             var $div = $('<div>').addClass('card').attr('id',object.id);
             $div.append($img1).append($img).append($div2).append($div3);
-            $('#kafle').append($div);
+            $('#drag').append($div);
         });
     })();
 
-    $('.card').on('click', function(){
+    $('.card:not(.dragplace)').on('click', function(){
         $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto'});
         $('h5', '#infoWindow').text(objects[$(this).attr('id')].name);
         $('p', '#infoWindow').text(objects[$(this).attr('id')].description);

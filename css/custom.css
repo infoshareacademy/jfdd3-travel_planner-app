@@ -54,12 +54,23 @@ main {
 }
 .card {
     background-color: white;
-    max-width: 180px;
+    width: 180px;
+    height: 220px;
     margin: 10px;
     border: none;
     border-radius: 5px;
     overflow: hidden;
     box-shadow:3px 3px 6px black;
+}
+.dropplace {
+    width: 180px;
+    height: 220px;
+    text-align: center;
+    padding: 20px 5px 20px;
+    border: 4px dashed #23b5b2;
+    background-color: #e4e4e4;
+    box-shadow: none;
+    border-radius: 5px;
 }
 
 .card-title {
@@ -84,10 +95,13 @@ main {
 
 #kafle {
     display: flex;
+    background-color: #e4e4e4;
+}
+#drag{
+    display: flex;
+    height: 220px;
     flex-wrap: wrap;
     max-width: 100%;
-    background-color: #e4e4e4;
-
 }
 
 .card img {
@@ -144,13 +158,7 @@ main {
     height: 40%;
     align-self: center;
 }
-#infoWindow button {
-    width: 40%;
-}
-.infoWindowBottom {
-    display: flex;
-    justify-content: space-around;
-}
+
 .infoMarker {
     border-radius: 50%;
     border: none;

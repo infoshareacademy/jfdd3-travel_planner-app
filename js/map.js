@@ -9,7 +9,7 @@ var waypts;
 
 
 
-function initMap() {
+function initiMap() {
 
 
     var bounds = new google.maps.LatLngBounds();
