@@ -123,7 +123,7 @@ function initMap() {
         $('#map').show();
         $('#kafle').hide();
         $('#changeViewsdsd').text('Mapa');
-        $('#routeWindow').css({'width': '25%', 'height': '40%'});
+        $('#routeWindow').css({'width': '25%', 'height': '40%'}).data('show',true);
     });
 }
 

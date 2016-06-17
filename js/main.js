@@ -11,11 +11,14 @@ $(document).ready(function() {
     if ($('#changeViewsdsd').text() === 'Mapa') {
         $('#map').show();
         $('#kafle').hide();
-        // $('.cont').css({'overflow': 'hidden'});
+        $('.cont').css({'overflow': 'hidden'});
+        $('#infoWindow').css({'width': '0', 'height': '0'});
+        if ($('#routeWindow').data('show')) {$('#routeWindow').css({'width': '25%', 'height': '40%'});}
     } else {
         $('#map').hide();
         $('#kafle').show();
-       //  $('.cont').css({'overflow': 'auto'});
+        $('.cont').css({'overflow': 'auto'});
+        $('#routeWindow').css({'width': '0', 'height': '0'});
     }
     });
 
@@ -60,12 +63,13 @@ $(document).ready(function() {
     (function() {
         objects.forEach(function (object) {
             var $img = $('<img>').attr('src',object.url);
+            var $img1 = $('<div>').addClass('infoMarker');
             var $p = $('<p>').addClass('card-text').text(object.name);
             var $h4 = $('<h5>').addClass('card-title').text(object.name);
             var $div3 = $('<div>').addClass('card-block').append($p);
             var $div2 = $('<div>').addClass('card-block').append($h4);
             var $div = $('<div>').addClass('card').attr('id',object.id);
-            $div.append($img).append($div2).append($div3);
+            $div.append($img1).append($img).append($div2).append($div3);
             $('#kafle').append($div);
         });
     })();

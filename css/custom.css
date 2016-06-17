@@ -49,6 +49,9 @@ main {
     margin-top: 2%;
 }
 
+.dropdown > button {
+    box-shadow:3px 3px 6px black;
+}
 .card {
     background-color: white;
     max-width: 180px;
@@ -56,12 +59,12 @@ main {
     border: none;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow:3px 3px 6px black;
 }
 
 .card-title {
     padding-top: 10px;
     width: 100%;
-    /*line-height: 35px;*/
     text-align: center;
     color: #23b5b2;
 
@@ -101,7 +104,7 @@ main {
     top: 10px;
     left: 10px;
     background-color: rgba(228, 228, 228, 0.9);
-    transition: width 2s, height 2s;
+    transition: width 1s, height 1s;
     border: 1px solid #23b5b2;
     border-radius: 10px;
     overflow: hidden;
@@ -117,12 +120,14 @@ main {
     height: 0;
     top: 10px;
     left: 10px;
-    background-color: rgba(228, 228, 228, 0.9);
-    transition: width 2s, height 2s;
+    background-color: rgba(245, 245, 245, 1);
+    transition: width 1s, height 1s;
     border: 1px solid #23b5b2;
     border-radius: 10px;
     overflow: hidden;
-    color: #23b5b2;
+    color: #228481;
+    text-shadow:1px 1px 10px #948c8e;
+    box-shadow:3px 3px 6px black;
 }
 #infoWindow span, #routeWindow span {
     align-self: flex-end;
@@ -145,4 +150,18 @@ main {
 .infoWindowBottom {
     display: flex;
     justify-content: space-around;
+}
+.infoMarker {
+    border-radius: 50%;
+    border: none;
+    background-image: url('../images/marker.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color:white;
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
 }
