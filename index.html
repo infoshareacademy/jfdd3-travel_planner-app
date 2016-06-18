@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/menu.css">
 
+    <!-- Intro CSS -->
+    <link rel="stylesheet" href="css/introjs.css">
+
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
@@ -32,9 +35,12 @@
 <!-- Navigation -->
 <div class="cont">
     <nav class="navbar navbar-light bg-faded">
+        <div class="nav navbar-nav pull-left">
+            <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner" data-step="1" data-intro="Witaj w TravelPlanner. Pomożemy Tobie zwiedzić Gdańskie zabytki za pomocą optymalnej trasy. Poniżej znajduje się mapa na której umieszczone sa znaczniki interesujących miejsc. Kliknij na jeden aby zobaczyc jego opis. Tutaj również bedziesz mógł ustawić go jako punkt początkowy bądz końcowy Twojej wycieczki." data-position="bottom-right"> </a>
+        </div>
         <div class="nav navbar-nav pull-right">
             <div class="groupped-menu">
-                <div class="dropdown">
+                <div class="dropdown"  data-step="2" data-intro="Kliknij aby ustawic skąd chcesz wyruszyć.">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt startowy
                     </button>
@@ -43,16 +49,16 @@
                     </div>
                 </div>
 
-                <div class="dropdown">
+                <div class="dropdown"  data-step="3" data-intro="Kliknij aby ustawic dokąd chcesz dotrzeć.">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt końcowy
                     </button>
                     <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu"></div>
                 </div>
-                <div class="dropdown">
+                <div class="dropdown" data-step="4" data-intro="Naciśnij aby wyświetlić optymalną trasę.">
                     <button class="btn btn-primary" type="button" id="btnShowMeTheWay">Wyznacz trasę</button>
                 </div>
-                <div class="dropdown">
+                <div class="dropdown" data-step="5" data-intro="Tutaj możesz zmienić sposób wyświetlania zabytków.">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Zmień widok
                     </button>
@@ -62,9 +68,6 @@
                 </div>
 
             </div>
-        </div>
-        <div class="nav navbar-nav pull-left">
-            <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner"> </a>
         </div>
     </nav>
     <!-- Main -->
@@ -88,6 +91,7 @@
 <!--new key -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=initMap" async defer></script>
 <script src="js/monumentsData.js"></script>
+<script src="js/intro.js"></script>
 <script src="js/main.js"></script>
 <script src="js/menu.js"></script>
 <script src="js/map.js"></script>

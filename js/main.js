@@ -98,4 +98,5 @@ $(document).ready(function() {
         $('#endPointDropdownMenu').text($('#infoWindow').find('h5').text());
     })
 
+    introJs().start();
 });
