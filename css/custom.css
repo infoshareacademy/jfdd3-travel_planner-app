@@ -61,6 +61,7 @@ main {
     border-radius: 5px;
     overflow: hidden;
     box-shadow:3px 3px 6px black;
+    z-index: 1000;
 }
 .dropplace {
     width: 180px;
@@ -94,16 +95,20 @@ main {
 
 
 #kafle {
-    display: flex;
     background-color: #e4e4e4;
-}
-#drag{
-    display: flex;
-    height: 220px;
-    flex-wrap: wrap;
-    max-width: 100%;
-}
 
+}
+#drop {
+    display: flex;
+    margin: 30px;
+    overflow: hidden;
+    height: 240px;
+}
+#dropS, #dropE {
+    width: 200px;
+    height: 240px;
+    overflow: hidden;
+}
 .card img {
     max-width: 100%;
 }
@@ -142,6 +147,7 @@ main {
     color: #228481;
     text-shadow:1px 1px 10px #948c8e;
     box-shadow:3px 3px 6px black;
+    z-index: 9999;
 }
 #infoWindow span, #routeWindow span {
     align-self: flex-end;

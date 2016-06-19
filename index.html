@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
 
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
@@ -70,9 +71,15 @@
     <!-- Main -->
     <main>
         <div id="map"></div>
-        <div id="kafle"><div id="dropS"></div><div id="dropE"></div><div id="drag"></div></div>
-        <div id="infoWindow"><span>X</span><img><h5></h5><p></p></div>
+        <div id="kafle">
+            <div id="drop">
+                <div id="dropS"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt startowy</div></div>
+                <div id="dropE"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt końcowy</div></div>
+            </div>
+            <div id="drag">
+            </div>
         </div>
+        <div id="infoWindow"><span>X</span><img><h5></h5><p></p></div>
         <div id="routeWindow"><span>X</span></div>
     </main>
 </div>
@@ -88,6 +95,7 @@
 <!--new key -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=initMap" async defer></script>
 <script src="js/monumentsData.js"></script>
+<script src="js/jquery.bxslider.js"></script>
 <script src="js/main.js"></script>
 <script src="js/menu.js"></script>
 <script src="js/map.js"></script>

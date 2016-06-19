@@ -2,37 +2,35 @@
 var startPosition, endPosition;
 var walkingRoute = [];
 var walkingRoute2 = [];
+var ul;
+var li_items;
+var li_number;
+var image_number = 0;
+var slider_width = 0;
+var image_width;
+var current = 0;
 
 $(document).ready(function() {
 
     $('#map').hide();
 
-    $('#drag').sortable({
-        connectWith: "#dropS, #dropE"
-    });
+
+
     $('#dropS').sortable({
-        connectWith: "#drag",
         items: "> .card",
         receive: function () {
             $('#dropS').find('.dropplace').hide();
-            $('#startPointDropdownMenu').text(objects[$('#dropS').find('.card').attr('id')].name);
-        },
-        start: function () {
-            $('#dropS').find('.dropplace').show();
-            $('#startPointDropdownMenu').text('Punkt startowy');
-
+            if ($('#dropS').find('.card').length > 1) {$('#dropS').find('.card').eq(1).remove()}
+            $('#startPointDropdownMenu').text($('#dropS').find('.card-title').text());
         }
     });
     $('#dropE').sortable({
-        connectWith: "#drag",
+        revert: true,
         items: "> .card",
         receive: function() {
             $('#dropE').find('.dropplace').hide();
-            $('#endPointDropdownMenu').text(objects[$('#dropE').find('.card').attr('id')].name);
-        },
-        start: function(){
-            $('#dropE').find('.dropplace').show();
-
+            if ($('#dropE').find('.card').length > 1) {$('#dropE').find('.card').eq(1).remove()}
+            $('#endPointDropdownMenu').text($('#dropE').find('.card-title').text());
         }
     });
 
@@ -40,7 +38,7 @@ $(document).ready(function() {
     $('#changeView').on('click', function(){
     if ($('#changeViewsdsd').text() === 'Mapa') {
         $('#map').show();
-        initiMap();
+        if (map === undefined) {initiMap();}
         $('#kafle').hide();
         $('.cont').css({'overflow': 'hidden'});
         $('#infoWindow').css({'width': '0', 'height': '0'});
@@ -91,9 +89,7 @@ $(document).ready(function() {
         }
     });
 
-    (function() {
-        $('#dropS').append($('<div>').addClass('dropplace').text('Przeciągnij element, który chcesz ustawić jako punkt startowy'));
-        $('#dropE').append($('<div>').addClass('dropplace').text('Przeciągnij element, który chcesz ustawić jako punkt końcowy'));
+    var createCards = function() {
         objects.forEach(function (object) {
             var $img = $('<img>').attr('src',object.url);
             var $img1 = $('<div>').addClass('infoMarker');
@@ -101,19 +97,18 @@ $(document).ready(function() {
             var $h4 = $('<h5>').addClass('card-title').text(object.name);
             var $div3 = $('<div>').addClass('card-block').append($p);
             var $div2 = $('<div>').addClass('card-block').append($h4);
-            var $div = $('<div>').addClass('card').attr('id',object.id);
+            var $div = $('<div>').addClass('card slider').attr('id',object.id);
             $div.append($img1).append($img).append($div2).append($div3);
             $('#drag').append($div);
+            $div.draggable({
+                connectToSortable: "#dropS, #dropE",
+                helper: "clone",
+                revert: "invalid"
+            });
         });
-    })();
+    };
 
-    $('.card:not(.dragplace)').on('click', function(){
-        $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto'});
-        $('h5', '#infoWindow').text(objects[$(this).attr('id')].name);
-        $('p', '#infoWindow').text(objects[$(this).attr('id')].description);
-        $('img', '#infoWindow').attr('src',objects[$(this).attr('id')].url);
 
-    });
 
     $('span', '#infoWindow').on('click', function(){
         $('#infoWindow').css({'width': '0', 'height': '0'});
@@ -129,6 +124,20 @@ $(document).ready(function() {
 
     $('#btnEndInfo').on('click', function() {
         $('#endPointDropdownMenu').text($('#infoWindow').find('h5').text());
-    })
+    });
+    createCards();
+    $('#drag').bxSlider({
+        slideWidth: 180,
+        minSlides: 2,
+        maxSlides: Math.floor(screen.width/180),
+        moveSlides: 1,
+        slideMargin: 20
+    });
+    $('.card').on('click', function(){
+        $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto'});
+        $('h5', '#infoWindow').text(objects[$(this).attr('id')].name);
+        $('p', '#infoWindow').text(objects[$(this).attr('id')].description);
+        $('img', '#infoWindow').attr('src',objects[$(this).attr('id')].url);
 
+    });
 });
