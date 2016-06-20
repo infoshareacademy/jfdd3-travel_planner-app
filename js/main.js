@@ -36,13 +36,11 @@ $(document).ready(function() {
         $('#kafle').hide();
         $('.cont').css({'overflow': 'hidden'});
         $('#infoWindow').css({'width': '0', 'height': '0'});
-        if ($('#routeWindow').data('show')) {$('#routeWindow').css({'width': '25%', 'height': '40%'});}
     } else {
         $('main').css({'height': ''});
         $('#map').hide();
         $('#kafle').show();
         $('.cont').css({'overflow': 'inherit'});
-        $('#routeWindow').css({'width': '0', 'height': '0'});
         $('#drag').bxSlider({
             slideWidth: 180,
             minSlides: 2,
