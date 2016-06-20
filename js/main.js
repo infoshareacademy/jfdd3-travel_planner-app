@@ -6,7 +6,7 @@ var walkingRoute2 = [];
 
 $(document).ready(function() {
 
-    $('#map').hide();
+    $('#kafle').hide();
 
 
 
@@ -33,7 +33,6 @@ $(document).ready(function() {
     if ($('#changeViewsdsd').text() === 'Mapa') {
         $('main').css({'height': '95%'});
         $('#map').show();
-        if (map === undefined) {initiMap();}
         $('#kafle').hide();
         $('.cont').css({'overflow': 'hidden'});
         $('#infoWindow').css({'width': '0', 'height': '0'});
@@ -44,6 +43,13 @@ $(document).ready(function() {
         $('#kafle').show();
         $('.cont').css({'overflow': 'inherit'});
         $('#routeWindow').css({'width': '0', 'height': '0'});
+        $('#drag').bxSlider({
+            slideWidth: 180,
+            minSlides: 2,
+            maxSlides: Math.floor(screen.width/180),
+            moveSlides: 1,
+            slideMargin: 20
+        });
     }
     });
 
@@ -88,7 +94,6 @@ $(document).ready(function() {
             });
             $('main').css({'height': '95%'});
             $('.cont').css({'overflow': 'hidden'});
-            if (map === undefined) {initiMap();}
             initRoute();
             $('#map').show();
             $('#kafle').hide();
@@ -134,13 +139,7 @@ $(document).ready(function() {
         $('#endPointDropdownMenu').text($('#infoWindow').find('h5').text());
     });
     createCards();
-    $('#drag').bxSlider({
-        slideWidth: 180,
-        minSlides: 2,
-        maxSlides: Math.floor(screen.width/180),
-        moveSlides: 1,
-        slideMargin: 20
-    });
+
     $('.card').on('click', function(){
         $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto','visibility': 'visible'});
         $('h5', '#infoWindow').text(objects[$(this).attr('id')].name);
