@@ -12,6 +12,7 @@ body {
 .cont {
     height: 100vh;
     background-color: #E4E4E4;
+    overflow: hidden;
 }
 
 .main-container {

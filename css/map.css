@@ -4,7 +4,9 @@
     height: 100%;
 }
 
-
+main {
+    height: 95%;
+}
 .infoWindowButtons {
     display: flex;
     flex-wrap: wrap;
