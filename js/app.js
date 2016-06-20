@@ -1,9 +1,8 @@
 (function(){
-    var app = angular.module('travelApp', []);
+    var app = angular.module('travelApp', ['ngToast']);
     app.controller('travelCtrl', funcTravelCtrl);
 
-        function funcTravelCtrl($scope){
-            $scope.name = 'abrakadabrahokuspokuskonstantynopolitańczykowianeczkatrzy'
-
+        function funcTravelCtrl($scope, ngToast){
+            ngToast.create('a toast message...');
     }
 })();

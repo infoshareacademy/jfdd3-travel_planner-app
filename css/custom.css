@@ -16,6 +16,7 @@ body {
 .cont {
     height: 100vh;
     background-color: #E4E4E4;
+    overflow: hidden;
 }
 
 .main-container {
@@ -115,24 +116,6 @@ main {
 }
 .card img {
     max-width: 100%;
-}
-
-#routeWindow {
-    position: absolute;
-    // visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 0;
-    height: 0;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(228, 228, 228, 0.9);
-    transition: width 1s, height 1s;
-    border: 1px solid #23b5b2;
-    border-radius: 10px;
-    overflow: hidden;
-    color: #23b5b2;
 }
 
 #infoWindow {
