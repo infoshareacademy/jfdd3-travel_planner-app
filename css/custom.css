@@ -1,13 +1,17 @@
 /* GENERAL STYLES
 -------------------------------------------------*/
 body {
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif ;
     font-size: 1em;
     color: #777;
     font-weight: 300;
     line-height: 1.7;
     overflow-x: hidden;
 }
+
+/* glyphicon font*/
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
 
 .cont {
     height: 100vh;

@@ -149,6 +149,8 @@ $(document).ready(function() {
 
     });
 
+    $('#intro').on('click', function () {
+        introJs().start();
+    });
 
-    introJs().start();
 });
