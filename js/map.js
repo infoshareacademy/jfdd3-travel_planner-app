@@ -9,7 +9,7 @@ var waypts;
 
 
 
-function initMap() {
+function initiMap() {
 
 
     var bounds = new google.maps.LatLngBounds();
@@ -47,14 +47,14 @@ function initMap() {
         infoWindowContent.push(
             '<div class="info_content">' +
             '<h3>' + objects[i].name + '</h3>' +
+            '<img src=' + objects[i].url + '>' +
+            '<p>' + objects[i].description + '</p>' +
             '<div class="infoWindowButtons"> ' +
             '<button type="button" class="btn btn-primary infoWindowBtnStart" id="' + objects[i].name + '"> ' +
             "Początek trasy" + '</button>' +
             '<button type="button" class="btn btn-primary infoWindowBtnEnd" id="' + objects[i].name + '">' +
             "Koniec trasy" + '</button>' +
             '</div>' +
-            '<img src=' + objects[i].url + '>' +
-            '<p>' + objects[i].description + '</p>' +
             '</div>'
         );
     }
@@ -113,18 +113,6 @@ function initMap() {
 
     //set direction service for map
     directionsDisplay.setMap(map);
-
-    //add event listener for oblicz trase button
-    $('#btnShowMeTheWay').on('click', function () {
-        walkingRoute2.forEach(function(item){
-            $('#routeWindow').append($('<p>').text(objects[item].name));
-        });
-        initRoute();
-        $('#map').show();
-        $('#kafle').hide();
-        $('#changeViewsdsd').text('Mapa');
-        $('#routeWindow').css({'width': '25%', 'height': '40%'}).data('show',true);
-    });
 }
 
 function initRoute() {

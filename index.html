@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="travelApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="css/map.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
 
     <!-- Intro CSS -->
     <link rel="stylesheet" href="css/introjs.css">
@@ -31,7 +32,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body ng-controller="travelCtrl">
 <!-- Navigation -->
 <div class="cont">
     <nav class="navbar navbar-light bg-faded">
@@ -73,16 +74,22 @@
     <!-- Main -->
     <main>
         <div id="map"></div>
-        <div id="kafle"></div>
-        <div id="infoWindow"><span>X</span><img><h5></h5><p></p><div class="infoWindowBottom"><button class="btn btn-primary" id="btnStartInfo">Ustaw jako punkt startowy</button>
-            <button class="btn btn-primary" id="btnEndInfo">Ustaw jako punkt końcowy</button></div>
+        <div id="kafle">
+            <div id="drop">
+                <div id="dropS"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt startowy</div></div>
+                <div id="dropE"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt końcowy</div></div>
+            </div>
+            <div id="drag">
+            </div>
         </div>
+        <div id="infoWindow"><span>X</span><img><h5></h5><p></p></div>
         <div id="routeWindow"><span>X</span></div>
     </main>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-2.2.4.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <!--old key-->
@@ -92,8 +99,11 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=initMap" async defer></script>
 <script src="js/monumentsData.js"></script>
 <script src="js/intro.js"></script>
+<script src="js/jquery.bxslider.js"></script>
 <script src="js/main.js"></script>
 <script src="js/menu.js"></script>
 <script src="js/map.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
