@@ -2,13 +2,7 @@
 var startPosition, endPosition;
 var walkingRoute = [];
 var walkingRoute2 = [];
-var ul;
-var li_items;
-var li_number;
-var image_number = 0;
-var slider_width = 0;
-var image_width;
-var current = 0;
+
 
 $(document).ready(function() {
 
@@ -37,6 +31,7 @@ $(document).ready(function() {
 
     $('#changeView').on('click', function(){
     if ($('#changeViewsdsd').text() === 'Mapa') {
+        $('main').css({'height': '95%'});
         $('#map').show();
         if (map === undefined) {initiMap();}
         $('#kafle').hide();
@@ -44,9 +39,10 @@ $(document).ready(function() {
         $('#infoWindow').css({'width': '0', 'height': '0'});
         if ($('#routeWindow').data('show')) {$('#routeWindow').css({'width': '25%', 'height': '40%'});}
     } else {
+        $('main').css({'height': ''});
         $('#map').hide();
         $('#kafle').show();
-        $('.cont').css({'overflow': 'auto'});
+        $('.cont').css({'overflow': 'inherit'});
         $('#routeWindow').css({'width': '0', 'height': '0'});
     }
     });
@@ -62,7 +58,7 @@ $(document).ready(function() {
             }
         });
 
-        if (startPosition !== endPosition) {
+        if ((startPosition !== undefined) && (endPosition !== undefined) &&(startPosition !== endPosition)) {
 
             var i = 0;
             walkingRoute = [{id: startPosition, moves: [startPosition]}];
@@ -86,6 +82,17 @@ $(document).ready(function() {
                 i++;
             }
             walkingRoute2 = walkingRoute[walkingRoute.length - 1].moves;
+            $('#routeWindow').css({'width': '25%', 'height': '40%'}).data('show',true).find('p').remove();
+            walkingRoute2.forEach(function(item){
+                $('#routeWindow').append($('<p>').text(objects[item].name));
+            });
+            $('main').css({'height': '95%'});
+            $('.cont').css({'overflow': 'hidden'});
+            if (map === undefined) {initiMap();}
+            initRoute();
+            $('#map').show();
+            $('#kafle').hide();
+            $('#changeViewsdsd').text('Mapa');
         }
     });
 
@@ -112,6 +119,7 @@ $(document).ready(function() {
 
     $('span', '#infoWindow').on('click', function(){
         $('#infoWindow').css({'width': '0', 'height': '0'});
+        setTimeout(function(){$('#infoWindow').css({'visibility': 'hidden'})},1000)
     });
 
     $('span', '#routeWindow').on('click', function(){
@@ -134,10 +142,12 @@ $(document).ready(function() {
         slideMargin: 20
     });
     $('.card').on('click', function(){
-        $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto'});
+        $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto','visibility': 'visible'});
         $('h5', '#infoWindow').text(objects[$(this).attr('id')].name);
         $('p', '#infoWindow').text(objects[$(this).attr('id')].description);
         $('img', '#infoWindow').attr('src',objects[$(this).attr('id')].url);
 
     });
+
+
 });
