@@ -3,11 +3,11 @@
  */
 'use strict';
 
-function generateStartMenu() {
+/*function generateStartMenu() {
     objects.forEach(function(item) {
         $('#startDropped').append($('<button>').addClass('dropdown-item start-item').text(item.name));
     });
-}
+}*/
 
 
 function generateEndMenu() {
@@ -22,7 +22,7 @@ function generateViewMenu() {
 }
 
 generateEndMenu();
-generateStartMenu();
+// generateStartMenu();
 generateViewMenu();
 
 $('.start-item').on('click', function (event) {

@@ -6,9 +6,6 @@ var walkingRoute2 = [];
 
 $(document).ready(function() {
 
-    $('#kafle').hide();
-
-
 
     $('#dropS').sortable({
         items: "> .card",

@@ -29,10 +29,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-controller="travelCtrl">
+<body>
 <!-- Navigation -->
 <div class="cont">
-    <nav class="navbar navbar-light bg-faded">
+    <nav class="navbar navbar-light bg-faded" ng-controller="buttonsCtrl">
         <div class="nav navbar-nav pull-right">
             <div class="groupped-menu">
                 <div class="dropdown">
@@ -40,7 +40,7 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt startowy
                     </button>
                     <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
-
+                        <button class="dropdown-item end-item" ng-repeat="monument in monuments">{{monument.name}}</button>
                     </div>
                 </div>
 
@@ -69,39 +69,34 @@
         </div>
     </nav>
     <!-- Main -->
-    <main>
-        <div id="map"></div>
-        <div id="kafle">
-            <div id="drop">
-                <div id="dropS"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt startowy</div></div>
-                <div id="dropE"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt końcowy</div></div>
-            </div>
-            <div id="drag">
-            </div>
-        </div>
+    <main ng-controller="mainCtrl">
+        <map></map>
+        <tiles></tiles>
         <div id="infoWindow"><span>X</span><img><h5></h5><p></p></div>
     </main>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="js/jquery-2.2.4.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <!--old key-->
 <!--AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0-->
 
 <!--new key -->
+<!--
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=initMap" async defer></script>
+-->
 <script src="js/monumentsData.js"></script>
 <script src="js/jquery.bxslider.js"></script>
 <script src="js/main.js"></script>
 <script src="js/menu.js"></script>
 <script src="js/map.js"></script>
 
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="js/ngToast.min.js"></script>
-<script src="js/app.js"></script>
+<script src="angular/angular.min.js"></script>
+<script src="angular/ngToast.min.js"></script>
+<script src="angular/app.js"></script>
 
 </body>
 </html>
