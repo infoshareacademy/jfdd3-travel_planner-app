@@ -1,7 +1,7 @@
 /* GENERAL STYLES
 -------------------------------------------------*/
 body {
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif ;
     font-size: 1em;
     color: #777;
     font-weight: 300;
@@ -9,8 +9,14 @@ body {
     overflow-x: hidden;
 }
 
+/* glyphicon font*/
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
+
 .cont {
+    height: 100vh;
     background-color: #E4E4E4;
+    overflow: hidden;
 }
 
 .main-container {
@@ -49,17 +55,26 @@ main {
     margin-top: 2%;
 }
 
-.dropdown > button {
-    box-shadow:3px 3px 6px black;
-}
 .card {
     background-color: white;
-    max-width: 180px;
+    width: 180px;
+    height: 220px;
     margin: 10px;
     border: none;
     border-radius: 5px;
     overflow: hidden;
     box-shadow:3px 3px 6px black;
+    z-index: 1000;
+}
+.dropplace {
+    width: 180px;
+    height: 220px;
+    text-align: center;
+    padding: 20px 5px 20px;
+    border: 4px dashed #23b5b2;
+    background-color: #e4e4e4;
+    box-shadow: none;
+    border-radius: 5px;
 }
 
 .card-title {
@@ -82,37 +97,30 @@ main {
 }
 
 
-#kafle {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 100%;
+#kafle, #drag, main {
     background-color: #e4e4e4;
 
 }
-
+#drop {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+    overflow: hidden;
+    height: 240px;
+}
+#dropS, #dropE {
+    width: 200px;
+    height: 240px;
+    overflow: hidden;
+    margin: 0 30px 0;
+}
 .card img {
     max-width: 100%;
 }
 
-#routeWindow {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 0;
-    height: 0;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(228, 228, 228, 0.9);
-    transition: width 1s, height 1s;
-    border: 1px solid #23b5b2;
-    border-radius: 10px;
-    overflow: hidden;
-    color: #23b5b2;
-}
-
 #infoWindow {
     position: absolute;
+    visibility: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -128,6 +136,7 @@ main {
     color: #228481;
     text-shadow:1px 1px 10px #948c8e;
     box-shadow:3px 3px 6px black;
+    z-index: 9999;
 }
 #infoWindow span, #routeWindow span {
     align-self: flex-end;
@@ -144,13 +153,7 @@ main {
     height: 40%;
     align-self: center;
 }
-#infoWindow button {
-    width: 40%;
-}
-.infoWindowBottom {
-    display: flex;
-    justify-content: space-around;
-}
+
 .infoMarker {
     border-radius: 50%;
     border: none;

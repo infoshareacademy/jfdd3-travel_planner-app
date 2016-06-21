@@ -3,22 +3,51 @@ var startPosition, endPosition;
 var walkingRoute = [];
 var walkingRoute2 = [];
 
+
 $(document).ready(function() {
 
     $('#kafle').hide();
 
+
+
+    $('#dropS').sortable({
+        items: "> .card",
+        receive: function () {
+            $('#dropS').find('.dropplace').hide();
+            if ($('#dropS').find('.card').length > 1) {$('#dropS').find('.card').eq(1).remove()}
+            $('#startPointDropdownMenu').text($('#dropS').find('.card-title').text());
+        }
+    });
+    $('#dropE').sortable({
+        revert: true,
+        items: "> .card",
+        receive: function() {
+            $('#dropE').find('.dropplace').hide();
+            if ($('#dropE').find('.card').length > 1) {$('#dropE').find('.card').eq(1).remove()}
+            $('#endPointDropdownMenu').text($('#dropE').find('.card-title').text());
+        }
+    });
+
+
     $('#changeView').on('click', function(){
     if ($('#changeViewsdsd').text() === 'Mapa') {
+        $('main').css({'height': '95%'});
         $('#map').show();
         $('#kafle').hide();
         $('.cont').css({'overflow': 'hidden'});
         $('#infoWindow').css({'width': '0', 'height': '0'});
-        if ($('#routeWindow').data('show')) {$('#routeWindow').css({'width': '25%', 'height': '40%'});}
     } else {
+        $('main').css({'height': ''});
         $('#map').hide();
         $('#kafle').show();
-        $('.cont').css({'overflow': 'auto'});
-        $('#routeWindow').css({'width': '0', 'height': '0'});
+        $('.cont').css({'overflow': 'inherit'});
+        $('#drag').bxSlider({
+            slideWidth: 180,
+            minSlides: 2,
+            maxSlides: Math.floor(screen.width/180),
+            moveSlides: 1,
+            slideMargin: 20
+        });
     }
     });
 
@@ -33,7 +62,7 @@ $(document).ready(function() {
             }
         });
 
-        if (startPosition !== endPosition) {
+        if ((startPosition !== undefined) && (endPosition !== undefined) &&(startPosition !== endPosition)) {
 
             var i = 0;
             walkingRoute = [{id: startPosition, moves: [startPosition]}];
@@ -57,10 +86,20 @@ $(document).ready(function() {
                 i++;
             }
             walkingRoute2 = walkingRoute[walkingRoute.length - 1].moves;
+            $('#routeWindow').css({'width': '25%', 'height': '40%'}).data('show',true).find('p').remove();
+            walkingRoute2.forEach(function(item){
+                $('#routeWindow').append($('<p>').text(objects[item].name));
+            });
+            $('main').css({'height': '95%'});
+            $('.cont').css({'overflow': 'hidden'});
+            initRoute();
+            $('#map').show();
+            $('#kafle').hide();
+            $('#changeViewsdsd').text('Mapa');
         }
     });
 
-    (function() {
+    var createCards = function() {
         objects.forEach(function (object) {
             var $img = $('<img>').attr('src',object.url);
             var $img1 = $('<div>').addClass('infoMarker');
@@ -68,22 +107,22 @@ $(document).ready(function() {
             var $h4 = $('<h5>').addClass('card-title').text(object.name);
             var $div3 = $('<div>').addClass('card-block').append($p);
             var $div2 = $('<div>').addClass('card-block').append($h4);
-            var $div = $('<div>').addClass('card').attr('id',object.id);
+            var $div = $('<div>').addClass('card slider').attr('id',object.id);
             $div.append($img1).append($img).append($div2).append($div3);
-            $('#kafle').append($div);
+            $('#drag').append($div);
+            $div.draggable({
+                connectToSortable: "#dropS, #dropE",
+                helper: "clone",
+                revert: "invalid"
+            });
         });
-    })();
+    };
 
-    $('.card').on('click', function(){
-        $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto'});
-        $('h5', '#infoWindow').text(objects[$(this).attr('id')].name);
-        $('p', '#infoWindow').text(objects[$(this).attr('id')].description);
-        $('img', '#infoWindow').attr('src',objects[$(this).attr('id')].url);
 
-    });
 
     $('span', '#infoWindow').on('click', function(){
         $('#infoWindow').css({'width': '0', 'height': '0'});
+        setTimeout(function(){$('#infoWindow').css({'visibility': 'hidden'})},1000)
     });
 
     $('span', '#routeWindow').on('click', function(){
@@ -96,6 +135,19 @@ $(document).ready(function() {
 
     $('#btnEndInfo').on('click', function() {
         $('#endPointDropdownMenu').text($('#infoWindow').find('h5').text());
-    })
+    });
+    createCards();
+
+    $('.card').on('click', function(){
+        $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto','visibility': 'visible'});
+        $('h5', '#infoWindow').text(objects[$(this).attr('id')].name);
+        $('p', '#infoWindow').text(objects[$(this).attr('id')].description);
+        $('img', '#infoWindow').attr('src',objects[$(this).attr('id')].url);
+
+    });
+
+    $('#intro').on('click', function () {
+        introJs().start();
+    });
 
 });
