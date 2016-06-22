@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="travelApp">
+<html lang="pl" ng-app="travelApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,51 +30,12 @@
     <![endif]-->
 </head>
 <body ng-controller="buttonsCtrl as bc">
-<!-- Navigation -->
 <div class="cont">
-    <nav class="navbar navbar-light bg-faded">
-        <div class="nav navbar-nav pull-right">
-            <div class="groupped-menu">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.startPoint}}
-                    </button>
-                    <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
-                        <button class="dropdown-item start-item" ng-repeat="monument in bc.monuments" ng-click="bc.setStart(monument.name)">{{monument.name}}</button>
-                    </div>
-                </div>
-
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.endPoint}}
-                    </button>
-                    <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu">
-                        <button class="dropdown-item end-item" ng-repeat="monument in bc.monuments" ng-click="bc.setEnd(monument.name)">{{monument.name}}</button>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary" type="button" id="btnShowMeTheWay">Wyznacz trasę</button>
-                </div>
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.currView}}
-                    </button>
-                    <div class="dropdown-menu" id="changeView" aria-labelledby="changeView">
-                        <button class="dropdown-item view-item" ng-repeat="view in bc.views" ng-click="bc.setView(view)">{{view}}</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="nav navbar-nav pull-left">
-            <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner"> </a>
-        </div>
-    </nav>
-    <!-- Main -->
+    <navbar></navbar>
     <main ng-controller="mainCtrl as mc">
-        <map ng-show="bc.showMap"></map>
+        <div id="map" ng-show="bc.showMap"></div>
         <tiles ng-hide="bc.showMap"></tiles>
-        <div id="infoWindow"><span>X</span><img><h5></h5><p></p></div>
+        <div id="infoWindow"><span ng-click="mc.showInfoWindow()">X</span><img><h5></h5><p></p></div>
     </main>
 </div>
 
@@ -86,18 +47,15 @@
 <!--old key-->
 <!--AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0-->
 
-<!--new key -->
-<!--
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=initMap" async defer></script>
--->
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=initMap" async defer></script>
+<script src="angular/angular.min.js"></script>
+<script src="angular/ngToast.min.js"></script>
+<script src="angular/app.js"></script>
 <script src="js/monumentsData.js"></script>
 <script src="js/jquery.bxslider.js"></script>
 <script src="js/main.js"></script>
 <script src="js/map.js"></script>
-
-<script src="angular/angular.min.js"></script>
-<script src="angular/ngToast.min.js"></script>
-<script src="angular/app.js"></script>
 
 </body>
 </html>
