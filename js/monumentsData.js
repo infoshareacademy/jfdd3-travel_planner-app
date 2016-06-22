@@ -33,3 +33,4 @@ var objects = [];
     createPoint(9, [3, 10],'Kaplica Królewska',[54.350403,18.653747],"images/kaplicakrolewska.jpg", "Jedyna barokowa świątynia na gdańskim Głównym Mieście. Powstała z inicjatywy króla Jana III Sobieskiego jako tymczasowa kaplica katolicka dla wiernych z parafii Kościoła Mariackiego, który pozostawał w rękach protestantów. Jest dziełem gdańskiego budowniczego Barthela Ranischa. Powstała w latach 1678-1681, według projektów architekta królewskiego Tylmana z Gameren. Barokowe rzeźby fasady wykonał Andreas Schlüter Młodszy.");
 
     createPoint(10, [8, 9],'Żuraw',[54.350554,18.657557],"images/zuraw.jpg", "To największy dźwig portowy średniowiecznej Europy, jedna z najbardziej charakterystycznych budowli Gdańska. Położony nad Motławą, służył do przeładunku towarów i stawiania masztów na statkach. Pełnił zarazem funkcję bramy miejskiej.");
+ console.log(JSON.stringify(objects));
