@@ -35,7 +35,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-controller="travelCtrl">
+<body ng-controller="TravelCtrl">
 <!-- Navigation -->
 <div class="cont">
     <nav class="navbar navbar-light bg-faded">
@@ -43,45 +43,44 @@
             <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner" data-step="1" data-intro="Witaj w TravelPlanner. Pomożemy Tobie zwiedzić Gdańskie zabytki za pomocą optymalnej trasy. Poniżej znajduje się mapa na której umieszczone sa znaczniki interesujących miejsc. Kliknij na jeden aby zobaczyc jego opis. Tutaj również bedziesz mógł ustawić go jako punkt początkowy bądz końcowy Twojej wycieczki." data-position="bottom-right"> </a>
         </div>
         <div class="nav navbar-nav pull-right">
-            <!--<div class="g-signin2" ng-hide="signedIn" data-onsuccess="onSignIn"></div>-->
-            <!--<a href="#" ng-click="signOut()" ng-show="signedIn">Sign out</a>-->
-
+            <div class="g-signin2" ng-hide="signedIn" data-onsuccess="onSignIn"></div>
+            <button type="button" ng-click="signOut()" ng-show="signedIn">Sign out</button>
 
             <div class="groupped-menu">
-                <div class="dropdown">
-                    <div class="dropdown"  data-step="2" data-intro="Kliknij aby ustawic skąd chcesz wyruszyć.">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt startowy
-                        </button>
-                        <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
+                <div class="dropdown"  data-step="2" data-intro="Kliknij aby ustawic skąd chcesz wyruszyć.">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt startowy
+                    </button>
+                    <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
 
-                        </div>
                     </div>
+                </div>
 
-                    <div class="dropdown"  data-step="3" data-intro="Kliknij aby ustawic dokąd chcesz dotrzeć.">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt końcowy
-                        </button>
-                        <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu"></div>
-                    </div>
-                    <div class="dropdown" data-step="4" data-intro="Naciśnij aby wyświetlić optymalną trasę.">
-                        <button class="btn btn-primary" type="button" id="btnShowMeTheWay">Wyznacz trasę</button>
-                    </div>
-                    <div class="dropdown" data-step="5" data-intro="Tutaj możesz zmienić sposób wyświetlania zabytków.">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Zmień widok
-                        </button>
-                        <div class="dropdown-menu" id="changeView" aria-labelledby="changeView">
+                <div class="dropdown"  data-step="3" data-intro="Kliknij aby ustawic dokąd chcesz dotrzeć.">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt końcowy
+                    </button>
+                    <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu"></div>
+                </div>
+                <div class="dropdown" data-step="4" data-intro="Naciśnij aby wyświetlić optymalną trasę.">
+                    <button class="btn btn-primary" type="button" id="btnShowMeTheWay">Wyznacz trasę</button>
+                </div>
+                <div class="dropdown" data-step="5" data-intro="Tutaj możesz zmienić sposób wyświetlania zabytków.">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Zmień widok
+                    </button>
+                    <div class="dropdown-menu" id="changeView" aria-labelledby="changeView">
 
-                        </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary" id="intro">
-                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"> ? </span>
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"> ? </span>
                 </button>
             </div>
         </div>
     </nav>
+
+
     <!-- Main -->
     <main>
         <div id="map"></div>
