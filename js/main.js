@@ -6,6 +6,24 @@ var walkingRoute2 = [];
 
 $(document).ready(function() {
 
+    function hoverIn() {
+        $('.abcRioButtonLightBlue').css({'backgroundColor': 'orange'});
+    };
+
+    function hoverOut() {
+        $('.abcRioButtonLightBlue').css({'backgroundColor': 'rgb(35, 181, 178)'});
+    };
+
+    setTimeout(function(){
+        $('.abcRioButtonLightBlue').css({'backgroundColor': 'rgb(35, 181, 178)', 'color': 'white', 'border-radius': '.25rem', 'font-size': '1rem'});
+    },500);
+
+    setTimeout(function() {
+        $('.abcRioButtonLightBlue').hover(hoverIn, hoverOut);
+
+    },500);
+
+
     $('#kafle').hide();
 
 
