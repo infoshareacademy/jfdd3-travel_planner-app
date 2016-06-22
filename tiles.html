@@ -5,6 +5,13 @@
         <div id="dropE"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt końcowy</div></div>
     </div>
     <div id="drag">
+        <div ng-repeat="monument in bc.monuments" class="card slider" id="monument.id">
+            <div class="infoMarker"></div>
+            <img ng-src="{{monument.url}}"/>
+            <div class="card-block">
+                <h5>{{monument.name}}</h5>
+            </div>
+        </div>
     </div>
 </div>
 </body>
