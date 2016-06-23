@@ -7,21 +7,25 @@ var walkingRoute2 = [];
 $(document).ready(function() {
 
     function hoverIn() {
-        $('.abcRioButtonLightBlue').css({'backgroundColor': 'orange'});
+        $('.abcRioButton').css({'backgroundColor': 'rgb(238, 186, 76)', 'box-shadow': 'none'});
     };
 
     function hoverOut() {
-        $('.abcRioButtonLightBlue').css({'backgroundColor': 'rgb(35, 181, 178)'});
+        $('.abcRioButton').css({'backgroundColor': 'rgb(35, 181, 178)'});
     };
 
     setTimeout(function(){
-        $('.abcRioButtonLightBlue').css({'backgroundColor': 'rgb(35, 181, 178)', 'color': 'white', 'border-radius': '.25rem', 'font-size': '1rem'});
+        $('.abcRioButtonLightBlue').css({'backgroundColor': 'rgb(35, 181, 178)', 'color': 'white', 'border-radius': '.25rem', 'box-shadow': 'none'});
     },500);
 
     setTimeout(function() {
-        $('.abcRioButtonLightBlue').hover(hoverIn, hoverOut);
+        $('.abcRioButton').hover(hoverIn, hoverOut);
 
     },500);
+
+    //setTimeout(function) {
+    //    $('.abcRioButton').hover
+    //}
 
 
     $('#kafle').hide();
