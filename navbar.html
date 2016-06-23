@@ -6,7 +6,7 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.startPoint}}
                 </button>
                 <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
-                    <button class="dropdown-item start-item" ng-repeat="monument in bc.monuments" ng-click="bc.setStart(monument.name)">{{monument.name}}</button>
+                    <button class="dropdown-item start-item" ng-repeat="monument in bc.monuments" ng-click="bc.setStart(monument.id)">{{monument.name}}</button>
                 </div>
             </div>
 
@@ -15,11 +15,11 @@
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.endPoint}}
                 </button>
                 <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu">
-                    <button class="dropdown-item end-item" ng-repeat="monument in bc.monuments" ng-click="bc.setEnd(monument.name)">{{monument.name}}</button>
+                    <button class="dropdown-item end-item" ng-repeat="monument in bc.monuments" ng-click="bc.setEnd(monument.id)">{{monument.name}}</button>
                 </div>
             </div>
             <div class="dropdown">
-                <button class="btn btn-primary" type="button" id="btnShowMeTheWay">Wyznacz trasę</button>
+                <button class="btn btn-primary" type="button" id="btnShowMeTheWay" ng-click="bc.showWay()">Wyznacz trasę</button>
             </div>
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"

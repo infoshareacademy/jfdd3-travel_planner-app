@@ -6,6 +6,7 @@
     app.directive('tiles',showTiles);
 
 
+
     /* app controller for navigation buttons */
     function funcButtonCtrl() {
         var bc = this;
@@ -15,11 +16,16 @@
         bc.startPoint = 'Punkt startowy';
         bc.endPoint = 'Punkt końcowy';
         bc.currView = 'Zmień widok';
-        bc.setStart = function(place){
-            bc.startPoint = place;
+        bc.setStart = function(id){
+            bc.startPoint = objects[id].name;
+            bc.startId = id;
+            $('#dropS').empty().append($('<div>').addClass('card slider').html(objects[id].name));
+
         };
-        bc.setEnd = function(place){
-            bc.endPoint = place;
+        bc.setEnd = function(id){
+            bc.endPoint = objects[id].name;
+            bc.endId = id;
+            $('#dropE').trigger("sortreceive", [{},{item: $('#0')}]);
         };
         bc.setView = function(view) {
             bc.currView = view;
@@ -29,12 +35,46 @@
                 startTiles();
             }
         };
+
+        bc.showWay = function () {
+            if ((bc.startPoint !== 'Punkt startowy') && (bc.endPoint !== 'Punkt końcowy') && (bc.startPoint !== bc.endPoint)) {
+
+                var i = 0;
+                startPosition = bc.startId;
+                endPosition = bc.endId;
+                var walkingRoute = [{id: bc.startId, moves: [bc.startId]}];
+                var end = objects[bc.endId];
+                var foundEnd = false;
+
+                while (foundEnd === false) {
+                    var idPoint = walkingRoute[i].id;
+                    objects[idPoint].siblings.forEach(function (sibling) {
+                        if ((walkingRoute[i].moves.some(function (item) {
+                                return sibling === item
+                            }) === false) && (foundEnd === false)) {
+                            var object = {};
+                            object.id = sibling;
+                            object.moves = walkingRoute[i].moves.slice();
+                            object.moves.push(sibling);
+                            walkingRoute.push(object);
+                            if (object.id === end.id) {
+                                foundEnd = true;
+                            }
+                        }
+                    });
+                    i++;
+                }
+                walkingRouteForGoogle = walkingRoute[walkingRoute.length - 1].moves;
+                initRoute();
+            }
+        };
+
         function startMap(){
             bc.showMap = true;
         }
-        function startTiles(){
+        function startTiles() {
             bc.showMap = false;
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#drag').bxSlider({
                     slideWidth: 180,
                     minSlides: 2,
@@ -42,26 +82,27 @@
                     moveSlides: 1,
                     slideMargin: 20
                 });
-            },0);
+            }, 0);
             $('#dropS').sortable({
                 items: "> .card",
                 receive: function () {
                     $('#dropS').find('.dropplace').hide();
-                    if ($('#dropS').find('.card').length > 1) {$('#dropS').find('.card').eq(1).remove()}
+                    if ($('#dropS').find('.card').length > 1) {
+                        $('#dropS').find('.card').eq(1).remove()
+                    }
                     $('#startPointDropdownMenu').text($('#dropS').find('.card-title').text());
                 }
             });
-            $('#dropE').sortable({
-                revert: true,
-                items: "> .card",
-                receive: function() {
+            $('#dropE').on('sortreceive', function (event,ui,item) {
+                console.log(arguments);
                     $('#dropE').find('.dropplace').hide();
-                    if ($('#dropE').find('.card').length > 1) {$('#dropE').find('.card').eq(1).remove()}
+                    if ($('#dropE').find('.card').length > 1) {
+                        $('#dropE').find('.card').eq(1).remove()
+                    }
                     $('#endPointDropdownMenu').text($('#dropE').find('.card-title').text());
-                }
             });
-            objects.forEach(function(monument){
-                $('#'+monument.id).draggable({
+            objects.forEach(function (monument) {
+                $('#' + monument.id).draggable({
                     connectToSortable: "#dropS, #dropE",
                     helper: "clone",
                     revert: "invalid"
@@ -96,6 +137,6 @@
         return {
             restrict: 'E',
             templateUrl: 'tiles.html'
+            }
         }
-    }
 })();
