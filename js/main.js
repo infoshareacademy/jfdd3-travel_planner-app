@@ -2,10 +2,30 @@
 var startPosition, endPosition;
 var walkingRoute = [];
 var walkingRoute2 = [];
+var objects;
 
+var options = {
+    "async": false,
+    "crossDomain": true,
+    "url": "json/package.json",
+    "method": "GET"
+};
+
+$.ajax(options)
+    .done(function (data) {
+        showResponse(data);
+    })
+    .fail(function (error) {
+
+    });
+
+function showResponse(data) {
+    objects = data;
+    console.log(objects);
+}
 
 $(document).ready(function() {
-
+    initMap();
     $('#kafle').hide();
 
 
@@ -150,3 +170,5 @@ $(document).ready(function() {
 
 
 });
+
+
