@@ -5,7 +5,7 @@ var walkingRoute2 = [];
 var objects;
 
 var options = {
-    "async": false,
+    "async": true,
     "crossDomain": true,
     "url": "json/package.json",
     "method": "GET"
@@ -21,11 +21,14 @@ $.ajax(options)
 
 function showResponse(data) {
     objects = data;
-    console.log(objects);
+    initMap();
+    generateEndMenu();
+    generateStartMenu();
+    generateViewMenu();
 }
 
 $(document).ready(function() {
-    initMap();
+
     $('#kafle').hide();
 
 
