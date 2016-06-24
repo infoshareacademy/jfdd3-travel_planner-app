@@ -4,13 +4,23 @@
     app.controller('mainCtrl', funcMainCtrl);
     app.directive('navbar',showNavbar);
     app.directive('tiles',showTiles);
-
-
+    app.filter('lengthFormat',funcLengthFilter);
+    app.filter('dateFormat',funcDateFilter);
 
     /* app controller for navigation buttons */
-    function funcButtonCtrl($scope) {
+    function funcButtonCtrl($scope,$window) {
         var bc = this;
         startMap();
+        bc.showIntro = true;
+
+        bc.showRoute = false;
+        bc.showWaypoints=false;
+
+        bc.initMap = function(){
+            bc.showIntro = false;
+            initMap();
+        };
+
         bc.monuments = objects;
         bc.views = ['Mapa','Kafelki'];
         bc.startPoint = 'Punkt startowy';
@@ -38,8 +48,10 @@
         };
 
         bc.showWay = function () {
+            bc.showRoute = true;
+            $('#map').css({'width':'75%'});
             if ((bc.startPoint !== 'Punkt startowy') && (bc.endPoint !== 'Punkt końcowy') && (bc.startPoint !== bc.endPoint)) {
-
+                if (bc.currView === bc.views[1]) {startMap();}
                 var i = 0;
                 startPosition = bc.startId;
                 endPosition = bc.endId;
@@ -66,7 +78,33 @@
                     i++;
                 }
                 walkingRouteForGoogle = walkingRoute[walkingRoute.length - 1].moves;
-                initRoute();
+                if (walkingRouteForGoogle.length > 2) {
+                    bc.showWaypoints=true;
+                    walkingRouteForGoogle.forEach(function(card,index){
+                        if (index !== 0 && index !== walkingRouteForGoogle.length-1) {
+                            var $card = $('#'+card).clone().removeClass('card slider').addClass('miniCard').attr('id','');
+                            $card.find('.infoMarker').remove();
+                            $('#waypointsCards').append($card);
+
+                        }
+                    });
+                } else {
+                    bc.showWaypoints=false;
+                    $('#waypointsCards').children().remove();
+                }
+                bc.route = walkingRouteForGoogle;
+                initRoute(function(result){
+                    bc.distance = result.routes[0].legs.reduce(function(prev,curr){
+                        return prev + curr.distance.value;
+                    },0);
+                    bc.duration = result.routes[0].legs.reduce(function(prev,curr){
+                        return prev + curr.duration.value;
+                    },0);
+                    $scope.$apply(function(){
+                        bc.distance; bc.duration;
+                    });
+
+                });
             }
         };
     setTimeout(function(){
@@ -77,6 +115,7 @@
                 if ($('#dropS').find('.card').length > 1) {
                     $('#dropS').find('.card').eq(1).remove()
                 }
+                $('#waypointsCards').children().remove();
                 bc.setStart($(ui.item).attr('id'),true);
             }
         });
@@ -91,6 +130,7 @@
                 if ($('#dropE').find('.card').length > 1) {
                     $('#dropE').find('.card').eq(1).remove()
                 }
+                $('#waypointsCards').children().remove();
                 bc.setEnd($(ui.item).attr('id'),true);
             }
         });
@@ -126,7 +166,7 @@
     }
 
     /* app controller for main content */
-    function funcMainCtrl($scope,$window){
+    function funcMainCtrl($scope){
         var mc = this;
         mc.showMonumentInfo = function(id){
             $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto','visibility': 'visible'});
@@ -138,101 +178,6 @@
             $('#infoWindow').css({'width': '0', 'height': '0'});
             setTimeout(function(){$('#infoWindow').css({'visibility': 'hidden'})},1000)
         };
-
-        var markers = [];
-        var bounds = new google.maps.LatLngBounds();
-
-        $window.map = new google.maps.Map(document.getElementById('map'), {
-            disableDefaultUI: true
-        });
-
-
-        infowindow = new google.maps.InfoWindow({
-            pixelOffset: new google.maps.Size(-25, 0),
-            maxWidth: 392
-        });
-
-
-        google.maps.event.addListener(infowindow, 'domready', function () {
-            $('.info_content').closest('.gm-style-iw').parent().addClass('custom-iw');
-
-        });
-
-        var marker, i;
-        var infoWindowContent = [];
-
-
-// Automatically center the map, fitting all markers on the screen
-        map.fitBounds(bounds);
-
-// Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
-        var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
-            this.setZoom(17);
-            google.maps.event.removeListener(boundsListener);
-        });
-
-        for (i = 0; i < objects.length; i++) {
-            infoWindowContent.push(
-                '<div class="info_content">' +
-                '<h3>' + objects[i].name + '</h3>' +
-                '<img src=' + objects[i].url + '>' +
-                '<p>' + objects[i].description + '</p>' +
-                '<div class="infoWindowButtons"> ' +
-                '<button type="button" class="btn btn-primary infoWindowBtnStart" ng-click="bc.setStart(0)"> ' +
-                "Początek trasy" + '</button>' +
-                '<button type="button" class="btn btn-primary infoWindowBtnEnd" ng-click="bc.setEnd(0)">' +
-                "Koniec trasy" + '</button>' +
-                '</div>' +
-                '</div>'
-            );
-        }
-
-
-        for (i = 0; i < objects.length; i++) {
-
-            var image = {
-                url: 'images/marker.png',
-                size: new google.maps.Size(110, 180),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(10, 80),
-                scaledSize: new google.maps.Size(55, 90)
-            };
-
-            var position = new google.maps.LatLng(objects[i].position[0], objects[i].position[1]);
-            bounds.extend(position);
-
-
-            marker = new google.maps.Marker({
-                position: position,
-                map: map,
-                animation: google.maps.Animation.DROP,
-                icon: image
-            });
-
-            google.maps.event.addListener(marker, 'click', (function (marker, i) {
-                return function () {
-                    infowindow.setContent(infoWindowContent[i]);
-                    infowindow.open(map, marker);
-
-
-                    // //adds toggle bounce to marker on click
-                    // if (marker.getAnimation() !== null) {
-                    //     marker.setAnimation(null);
-                    // } else {
-                    //     marker.setAnimation(google.maps.Animation.BOUNCE);
-                    // }
-                }
-            })(marker, i));
-            //Add new marker to list of markers (to keep track of them)
-            markers.push(marker);
-        }
-
-        //direction services
-        directionsService = new google.maps.DirectionsService;
-        directionsDisplay = new google.maps.DirectionsRenderer;
-
-        //set direction service for map
-        directionsDisplay.setMap(map);
 
     }
 
@@ -249,4 +194,28 @@
             templateUrl: 'tiles.html'
             }
         }
+
+    function funcLengthFilter(){
+        return function(length) {
+            if (length>= 1000){
+                var int = Math.floor(length/1000);
+                length = int +' km. '+ (length-int*1000)+' m.';
+            } else {
+                length = length+' m.'
+            }
+            return length;
+        }
+    }
+
+    function funcDateFilter(){
+        return function(duration) {
+            if (duration >= 60){
+                var int = Math.floor(duration/60);
+                duration = int +' min. '+ (duration-int*60)+' sek.';
+            } else {
+                duration = duration+' sek.'
+            }
+            return duration;
+        }
+    }
 })();

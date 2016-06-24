@@ -12,7 +12,7 @@ var objects = [];
        objects.push(result);
 
    }
-    createPoint(0, [1, 2],'Wieża więzienna i katownia',[54.349794,18.647601],"images/wiezawieziennaikatownia.jpg", "Wieża Więzienna wraz z Katownią stanowią średniowieczny zespół przedbramia ulicy Długiej. Katownia przebudowana została w 1593 r. przez Flamanda, Antoniego van Obberghena, natomiast Wieża Więzienna podwyższona została do dzisiejszego stanu w latach 1508-1509 przez Michała Enkingera. Do czasu wzniesienia nowożytnych umocnień ziemnych w drugiej połowie XVI w.");
+    createPoint(0, [1, 2],'Katownia',[54.349794,18.647601],"images/wiezawieziennaikatownia.jpg", "Wieża Więzienna wraz z Katownią stanowią średniowieczny zespół przedbramia ulicy Długiej. Katownia przebudowana została w 1593 r. przez Flamanda, Antoniego van Obberghena, natomiast Wieża Więzienna podwyższona została do dzisiejszego stanu w latach 1508-1509 przez Michała Enkingera. Do czasu wzniesienia nowożytnych umocnień ziemnych w drugiej połowie XVI w.");
 
     createPoint(1, [0],'Baszta słomiana', [54.350453,18.6483069], "images/basztaslomiana.jpg", "Baszta została wzniesiona z cegły w drugiej połowie XIV wieku, w celu dodatkowej ochrony flankującej ówczesnych zachodnich obwarowań średniowiecznego Gdańska. Nazwę zawdzięcza być może pierwotnemu pokryciu dachu strzechą, która później została wymieniona na dachówkę. Obecny kształt baszta uzyskała w pierwszej połowie XV wieku.");
 
