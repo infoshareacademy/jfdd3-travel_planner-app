@@ -8,20 +8,47 @@
     app.filter('dateFormat',funcDateFilter);
 
     /* app controller for navigation buttons */
-    function funcButtonCtrl($scope,$window) {
+    function funcButtonCtrl($scope,$window,$timeout) {
         var bc = this;
         startMap();
         bc.showIntro = true;
-
         bc.showRoute = false;
         bc.showWaypoints=false;
+
+        window.gmapReady = function(){
+         /*   $timeout(function () {
+                bc.initMap();},0);*/
+            var options = {
+                "async": true,
+                "crossDomain": true,
+                "url": "json/monumentsData.json",
+                "method": "GET"
+            };
+
+            $.ajax(options)
+                .done(function (data) {
+                    showResponse(data);
+                })
+                .fail(function (error) {
+                    console.error(error);
+                });
+
+            function showResponse(data) {
+                bc.monuments = data;
+                objects = data;
+                bc.showIntro = false;
+                $timeout(function () {
+                    bc.initMap();},0);
+            }
+        };
+
 
         bc.initMap = function(){
             bc.showIntro = false;
             initMap();
         };
 
-        bc.monuments = objects;
+        /*bc.monuments = objects;*/
         bc.views = ['Mapa','Kafelki'];
         bc.startPoint = 'Punkt startowy';
         bc.endPoint = 'Punkt końcowy';

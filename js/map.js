@@ -1,7 +1,7 @@
 'use strict';
 
 var map, infowindow, directionsService, directionsDisplay, googleRes;
-var waypts, startPosition, endPosition;
+var objects, waypts, startPosition, endPosition;
 var walkingRouteForGoogle = [];
 
 function initMap(){
@@ -21,7 +21,6 @@ function initMap(){
 
     google.maps.event.addListener(infowindow, 'domready', function () {
         $('.info_content').closest('.gm-style-iw').parent().addClass('custom-iw');
-
     });
 
     var marker, i;
