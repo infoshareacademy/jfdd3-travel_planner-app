@@ -29,8 +29,8 @@
                 .done(function (data) {
                     showResponse(data);
                 })
-                .fail(function (error) {
-                    console.error(error);
+                .fail(function () {
+                    $('#intro').text('Wystąpił problem z aplikacją. Spróbuj ponownie później.')
                 });
 
             function showResponse(data) {
@@ -38,14 +38,10 @@
                 objects = data;
                 bc.showIntro = false;
                 $timeout(function () {
-                    bc.initMap();},0);
+                    bc.showIntro = false;
+                    initMap();
+                },0);
             }
-        };
-
-
-        bc.initMap = function(){
-            bc.showIntro = false;
-            initMap();
         };
 
         /*bc.monuments = objects;*/
