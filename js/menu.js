@@ -21,9 +21,7 @@ function generateViewMenu() {
 
 }
 
-generateEndMenu();
-generateStartMenu();
-generateViewMenu();
+
 
 $('.start-item').on('click', function (event) {
     $('#startPointDropdownMenu').text($(this).text());

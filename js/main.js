@@ -7,7 +7,7 @@ var objects;
 var options = {
     "async": true,
     "crossDomain": true,
-    "url": "json/package.json",
+    "url": "json/monumentsData.json",
     "method": "GET"
 };
 
