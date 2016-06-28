@@ -8,7 +8,7 @@
     app.filter('dateFormat',funcDateFilter);
 
     /* app controller for navigation buttons */
-    function funcButtonCtrl($scope,$window,$timeout) {
+    function funcButtonCtrl($scope,$timeout) {
         var bc = this;
         startMap();
         bc.showIntro = true;
