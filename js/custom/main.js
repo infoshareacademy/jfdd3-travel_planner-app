@@ -18,9 +18,4 @@ $(document).ready(function() {
         $('.abcRioButton').hover(hoverIn, hoverOut);
 
     },500);
-
-    //setTimeout(function) {
-    //    $('.abcRioButton').hover
-    //}
-
 });

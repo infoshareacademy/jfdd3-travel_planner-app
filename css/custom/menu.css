@@ -1,0 +1,71 @@
+.groupped-menu {
+    display: inline-flex;
+}
+
+.dropdown {
+    padding: 0 1% 0 1%;
+}
+
+.g-signin2 {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /*border: 1px solid transparent;*/
+    border-radius: .25rem;
+    padding: 1px;
+    margin-right: 1%;
+}
+
+
+.btn-primary, #signOutButton {
+    background-color: rgb(35, 181, 178);
+    border-color: rgb(35, 181, 178);
+    color: white;
+}
+
+.btn:hover {
+    background-color: rgb(238, 186, 76);
+    border-color: rgb(238, 186, 76);
+
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary, #signOutButton:hover {
+    background-color: rgb(238, 186, 76);
+    border-color: rgb(238, 186, 76);
+}
+
+.dropdown-item:hover {
+    background-color: rgb(238, 186, 76);
+}
+
+.groupped-menu {
+    margin-top: 2%;
+}
+#signOutButton {
+    width: 140px;
+    display: inline-block;
+    padding: .375rem 1rem;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    margin-right: 1%;
+}

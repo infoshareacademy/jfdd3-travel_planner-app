@@ -1,7 +1,10 @@
 <nav class="navbar navbar-light bg-faded">
+    <div class="nav navbar-nav pull-left">
+        <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner"> </a>
+    </div>
     <div class="nav navbar-nav pull-right">
         <div class="groupped-menu">
-            <div class="g-signin2" ng-hide="bc.signedIn" data-onsuccess="onSignIn"></div>
+            <div class="g-signin2" data-width="140" ng-hide="bc.signedIn" data-onsuccess="onSignIn"></div>
             <button type="button" id="signOutButton" ng-click="bc.onSignOut()" ng-show="bc.signedIn">Sign out</button>
 
             <div class="dropdown">
@@ -32,10 +35,6 @@
                     <button class="dropdown-item view-item" ng-repeat="view in bc.views" ng-click="bc.setView(view)">{{view}}</button>
                 </div>
             </div>
-
         </div>
-    </div>
-    <div class="nav navbar-nav pull-left">
-        <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner"> </a>
     </div>
 </nav>
