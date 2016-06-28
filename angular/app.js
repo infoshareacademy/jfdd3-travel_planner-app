@@ -98,9 +98,10 @@
         };
 
         bc.showWay = function () {
-            bc.showRoute = true;
-            $('#map').css({'width':'75%'});
+
             if ((bc.startPoint !== 'Punkt startowy') && (bc.endPoint !== 'Punkt końcowy') && (bc.startPoint !== bc.endPoint)) {
+                bc.showRoute = true;
+                $('#map').css({'width':'75%'});
                 if (bc.currView === bc.views[1]) {startMap();}
                 var i = 0;
                 startPosition = bc.startId;
