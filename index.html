@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="pl" ng-app="travelApp">
+<html lang="en" ng-app="travelApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="753860027871-kkasoe6ohmrqohc0rvva5sip79ih0ht1.apps.googleusercontent.com">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>TravelPlanner</title>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/custom.css">
-    <link rel="stylesheet" href="css/map.css">
-    <link rel="stylesheet" href="css/menu.css">
-    <link rel="stylesheet" href="css/jquery.bxslider.css">
+    <link rel="stylesheet" href="css/bootstrap.css" rel="stylesheet" media="screen">
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">-->
+
+
+
+    <!-- Intro CSS -->
+    <link rel="stylesheet" href="css/introjs.css">
 
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
@@ -22,6 +24,11 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,700,900' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/jquery.bxslider.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,46 +36,89 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body ng-controller="buttonsCtrl as bc">
-<div id="intro" ng-show="bc.showIntro">
-</div>
+<body ng-controller="TravelCtrl">
+<!-- Navigation -->
 <div class="cont">
-    <navbar></navbar>
-    <main ng-controller="mainCtrl as mc">
-        <div id="route" ng-show="bc.showMap && bc.showRoute" class="animate-show">
-            <p><strong>Twoja trasa:</strong></p>
-            <ol>
-            <li ng-repeat="point in bc.route">{{bc.monuments[point].name}}</li>
-            </ol>
-                <p><strong>Długość trasy:</strong></p>
-            <p>{{bc.distance | lengthFormat}}</p>
-            <p><strong>Czas przejścia:</strong></p>
-            <p>{{bc.duration | dateFormat}}</p>
+    <nav class="navbar navbar-light bg-faded">
+        <div class="nav navbar-nav pull-left">
+            <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner" data-step="1" data-intro="Witaj w TravelPlanner. Pomożemy Tobie zwiedzić Gdańskie zabytki za pomocą optymalnej trasy. Poniżej znajduje się mapa na której umieszczone sa znaczniki interesujących miejsc. Kliknij na jeden aby zobaczyc jego opis. Tutaj również bedziesz mógł ustawić go jako punkt początkowy bądz końcowy Twojej wycieczki." data-position="bottom-right"> </a>
         </div>
-        <div id="map" ng-show="bc.showMap"></div>
-        <tiles ng-hide="bc.showMap"></tiles>
-        <div id="infoWindow"><span ng-click="mc.showInfoWindow()">X</span><img><h5></h5><p></p></div>
+        <div class="nav navbar-nav pull-right">
+            <div class="g-signin2" ng-hide="signedIn" data-onsuccess="onSignIn"></div>
+            <button type="button" id="singOutButton" ng-click="signOut()" ng-show="signedIn">Sign out</button>
+
+            <div class="groupped-menu">
+                <div class="dropdown"  data-step="2" data-intro="Kliknij aby ustawic skąd chcesz wyruszyć.">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt startowy
+                    </button>
+                    <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
+
+                    </div>
+                </div>
+
+                <div class="dropdown"  data-step="3" data-intro="Kliknij aby ustawic dokąd chcesz dotrzeć.">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Punkt końcowy
+                    </button>
+                    <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu"></div>
+                </div>
+                <div class="dropdown" data-step="4" data-intro="Naciśnij aby wyświetlić optymalną trasę.">
+                    <button class="btn btn-primary" type="button" id="btnShowMeTheWay">Wyznacz trasę</button>
+                </div>
+                <div class="dropdown" data-step="5" data-intro="Tutaj możesz zmienić sposób wyświetlania zabytków.">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Zmień widok
+                    </button>
+                    <div class="dropdown-menu" id="changeView" aria-labelledby="changeView">
+
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="intro">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"> ? </span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main -->
+    <main>
+        <div id="map"></div>
+        <div id="kafle">
+            <div id="drop">
+                <div id="dropS"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt startowy</div></div>
+                <div id="dropE"><div class="dropplace">Przeciągnij element, który chcesz ustawić jako punkt końcowy</div></div>
+            </div>
+            <div id="drag">
+            </div>
+        </div>
+        <div id="infoWindow"><span>X</span><img><h5></h5><p></p></div>
     </main>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
 <script src="js/jquery-2.2.4.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <!--old key-->
 <!--AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0-->
 
+<!--new key -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=initMap" async defer></script>
+<script src="js/gapi.js"></script>
 
-
-<script src="angular/angular.min.js"></script>
-<script src="angular/ngToast.min.js"></script>
-<script src="angular/app.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCz1zAobjFLXKx3OUSEtRDnfDxRdgQTfK0&callback=gmapReady" async defer></script>
+<script src="js/monumentsData.js"></script>
+<script src="js/intro.js"></script>
 <script src="js/jquery.bxslider.js"></script>
 <script src="js/main.js"></script>
+<script src="js/menu.js"></script>
 <script src="js/map.js"></script>
+<script src="js/google-sing-in.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="js/ngToast.min.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
