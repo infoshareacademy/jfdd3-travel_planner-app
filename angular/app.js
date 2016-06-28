@@ -6,10 +6,6 @@
     app.filter('lengthFormat',funcLengthFilter);
     app.filter('dateFormat',funcDateFilter);
 
-
-
-
-      
     /* app controller for navigation buttons */
     function funcButtonCtrl($scope,$timeout) {
         var bc = this;
@@ -23,6 +19,9 @@
         bc.startPoint = 'Punkt startowy';
         bc.endPoint = 'Punkt końcowy';
         bc.currView = 'Zmień widok';
+        //global var for user id token from Google
+        var profileId;
+
 
         window.gmapReady = function(){
 
@@ -57,12 +56,19 @@
         window.onSignIn = function(googleUser) {
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+
+            //  Get user id token and store it in global variable
+            profileId = googleUser.getAuthResponse().id_token;
+
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail());
             $scope.$apply(bc.signedIn = true);
             console.log(bc.signedIn);
         };
+
+
+
 
         bc.onSignOut = function() {
             var auth2 = gapi.auth2.getAuthInstance();
@@ -72,6 +78,9 @@
                 console.log(bc.signedIn);
             });
         };
+
+
+
 
         bc.setStart = function(id,val){
             bc.startPoint = objects[id].name;
@@ -158,6 +167,36 @@
                     });
 
                 });
+                //    save route to local storage
+
+                //array for storing/updating local storage data
+                var savedRoutes = [];
+                var routeToSave = bc.route;
+                if(localStorage.length !== 0) {
+                    savedRoutes = JSON.parse(localStorage.savedRoutes);
+                    console.log(JSON.parse(localStorage.savedRoutes));
+                    // iterate through array, check if logged user is same ase  user in local storage and add new route
+                    console.log("przed petla");
+                    console.log("przed petla, savedRoutes.length: " + [savedRoutes].length);
+
+                    for (var j = 0; j < savedRoutes.length; j++) {
+                        console.log("w petli");
+                        //TODO  remove ' ' around profileId
+                        // console.log("user id : " + savedRoutes[j].userId);
+                        if ('profileId' == savedRoutes[j].userId) {
+                            // console.log("saved routes from local storage: " + savedRoutes[0]);
+                            // console.log(routeToSave)
+
+                            savedRoutes[j].route.push(routeToSave);
+                            console.log(JSON.stringify(savedRoutes[j]));
+                            localStorage.setItem("savedRoutes", JSON.stringify(savedRoutes));
+                        }
+                    }
+                } else {
+                    //TODO  remove ' ' around profileId
+                    localStorage.setItem('savedRoutes', JSON.stringify([{userId: 'profileId', route: [routeToSave] }]));
+                }
+
             }
         };
 
@@ -208,7 +247,7 @@
                     slideMargin: 20
                 });
             }, 0);
-            
+
             objects.forEach(function (monument) {
                 $('#' + monument.id).draggable({
                     connectToSortable: "#dropS, #dropE",
