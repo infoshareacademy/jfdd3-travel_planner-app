@@ -7,6 +7,10 @@
     app.filter('lengthFormat',funcLengthFilter);
     app.filter('dateFormat',funcDateFilter);
 
+
+
+
+      
     /* app controller for navigation buttons */
     function funcButtonCtrl($scope,$timeout) {
         var bc = this;
@@ -186,6 +190,38 @@
                 });
             });
         }
+
+        $scope.signedIn = false;
+        window.signedIn = $scope.signedIn;
+
+        $scope.onSignOut = onSignOut;
+        window.onSignOut = onSignOut;
+
+
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+            $scope.signedIn = true;
+            $scope.$apply();
+            console.log($scope.signedIn);
+        }
+
+        $scope.onSignIn = onSignIn;
+        window.onSignIn = onSignIn;
+
+        function onSignOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.onSignOut().then(function () {
+                console.log('User signed out.');
+                $scope.signedIn = false;
+                $scope.$apply();
+                console.log($scope.signedIn);
+            });
+        }
+
     }
 
     /* app controller for main content */
