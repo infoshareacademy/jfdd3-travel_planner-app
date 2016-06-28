@@ -78,12 +78,14 @@
             bc.startId = id;
             if (val) {$scope.$apply(function(){bc.startPoint});}
             $('#dropS').trigger("sortreceive", [{item: $('#'+id)}]);
+            $('#waypointsCards').children().remove();
         };
         bc.setEnd = function(id,val){
             bc.endPoint = objects[id].name;
             bc.endId = id;
             if (val) {$scope.$apply(function(){bc.endPoint});}
             $('#dropE').trigger("sortreceive", [{item: $('#'+id)}]);
+            $('#waypointsCards').children().remove();
         };
         bc.setView = function(view) {
             bc.currView = view;
