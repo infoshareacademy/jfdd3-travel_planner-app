@@ -18,6 +18,7 @@
         bc.showRoute = false;
         bc.showWaypoints = false;
         bc.descriptionShow = false;
+        bc.signedIn = false;
         bc.views = ['Mapa','Kafelki'];
         bc.startPoint = 'Punkt startowy';
         bc.endPoint = 'Punkt końcowy';
@@ -52,31 +53,28 @@
             }
         };
 
-        $scope.signedIn = false;
-        $scope.signOut = signOut;
 
-        function onSignIn(googleUser) {
+
+        window.onSignIn = SignIn;
+
+        function SignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail());
-            $scope.signedIn = true;
-            $scope.$apply();
-            console.log($scope.signedIn);
+            $scope.$apply(bc.signedIn = true);
+            console.log(bc.signedIn);
         }
 
-        window.onSignIn = onSignIn;
-
-        function signOut() {
+        bc.signOut = function() {
             var auth2 = gapi.auth2.getAuthInstance();
             auth2.signOut().then(function () {
                 console.log('User signed out.');
-                $scope.signedIn = false;
-                $scope.$apply();
-                console.log($scope.signedIn);
+                $scope.$apply(bc.signedIn = false);
+                console.log(bc.signedIn);
             });
-        }
+        };
 
         bc.setStart = function(id,val){
             bc.startPoint = objects[id].name;

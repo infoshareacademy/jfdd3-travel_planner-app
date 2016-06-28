@@ -1,9 +1,9 @@
 <nav class="navbar navbar-light bg-faded">
     <div class="nav navbar-nav pull-right">
         <div class="groupped-menu">
-
-            <div class="g-signin2" ng-hide="signedIn" data-onsuccess="onSignIn()"></div>
-            <button type="button" id="signOutButton" ng-click="onSignOut()" ng-show="signedIn">Sign out</button>
+{{bc.signedIn}}
+            <div class="g-signin2" ng-hide="bc.signedIn" data-onsuccess="onSignIn()"></div>
+            <button type="button" id="signOutButton" ng-click="bc.onSignOut()" ng-show="bc.signedIn">Sign out</button>
 
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
