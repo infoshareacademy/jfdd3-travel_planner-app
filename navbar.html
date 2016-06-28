@@ -1,6 +1,10 @@
 <nav class="navbar navbar-light bg-faded">
     <div class="nav navbar-nav pull-right">
         <div class="groupped-menu">
+
+            <div class="g-signin2" ng-hide="signedIn" data-onsuccess="onSignIn()"></div>
+            <button type="button" id="signOutButton" ng-click="onSignOut()" ng-show="signedIn">Sign out</button>
+
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.startPoint}}

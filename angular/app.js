@@ -7,6 +7,10 @@
     app.filter('lengthFormat',funcLengthFilter);
     app.filter('dateFormat',funcDateFilter);
 
+
+
+
+      
     /* app controller for navigation buttons */
     function funcButtonCtrl($scope,$timeout) {
         var bc = this;
@@ -16,8 +20,7 @@
         bc.showWaypoints=false;
 
         window.gmapReady = function(){
-         /*   $timeout(function () {
-                bc.initMap();},0);*/
+
             var options = {
                 "async": true,
                 "crossDomain": true,
@@ -38,13 +41,37 @@
                 objects = data;
                 bc.showIntro = false;
                 $timeout(function () {
+                    introJs().start();
                     bc.showIntro = false;
                     initMap();
                 },0);
             }
         };
+        $scope.signedIn = false;
+        $scope.signOut = signOut;
 
-        /*bc.monuments = objects;*/
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+            $scope.signedIn = true;
+            $scope.$apply();
+            console.log($scope.signedIn);
+        }
+
+        window.onSignIn = onSignIn;
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+                $scope.signedIn = false;
+                $scope.$apply();
+                console.log($scope.signedIn);
+            });
+        }
         bc.views = ['Mapa','Kafelki'];
         bc.startPoint = 'Punkt startowy';
         bc.endPoint = 'Punkt końcowy';
@@ -130,38 +157,38 @@
                 });
             }
         };
-    setTimeout(function(){
-        $('#dropS').sortable({
-            items: "> .card",
-            receive: function (event,ui) {
-                $('#dropS').find('.dropplace').remove();
-                if ($('#dropS').find('.card').length > 1) {
-                    $('#dropS').find('.card').eq(1).remove()
+        $timeout(function(){
+            $('#dropS').sortable({
+                items: "> .card",
+                receive: function (event,ui) {
+                    $('#dropS').find('.dropplace').remove();
+                    if ($('#dropS').find('.card').length > 1) {
+                        $('#dropS').find('.card').eq(1).remove()
+                    }
+                    $('#waypointsCards').children().remove();
+                    bc.setStart($(ui.item).attr('id'),true);
                 }
-                $('#waypointsCards').children().remove();
-                bc.setStart($(ui.item).attr('id'),true);
-            }
-        });
-        $('#dropS').on('sortreceive', function (event,item) {
-            $('#dropS').children().remove();
-            $('#dropS').append($(item.item).clone());
-        });
-        $('#dropE').sortable({
-            items: "> .card",
-            receive: function (event,ui) {
-                $('#dropE').find('.dropplace').remove();
-                if ($('#dropE').find('.card').length > 1) {
-                    $('#dropE').find('.card').eq(1).remove()
+            });
+            $('#dropS').on('sortreceive', function (event,item) {
+                $('#dropS').children().remove();
+                $('#dropS').append($(item.item).clone());
+            });
+            $('#dropE').sortable({
+                items: "> .card",
+                receive: function (event,ui) {
+                    $('#dropE').find('.dropplace').remove();
+                    if ($('#dropE').find('.card').length > 1) {
+                        $('#dropE').find('.card').eq(1).remove()
+                    }
+                    $('#waypointsCards').children().remove();
+                    bc.setEnd($(ui.item).attr('id'),true);
                 }
-                $('#waypointsCards').children().remove();
-                bc.setEnd($(ui.item).attr('id'),true);
-            }
-        });
-        $('#dropE').on('sortreceive', function (event,item) {
-            $('#dropE').children().remove();
-            $('#dropE').append($(item.item).clone());
-        });
-    },0);
+            });
+            $('#dropE').on('sortreceive', function (event,item) {
+                $('#dropE').children().remove();
+                $('#dropE').append($(item.item).clone());
+            });
+        },0);
 
         function startMap(){
             bc.showMap = true;
@@ -186,6 +213,38 @@
                 });
             });
         }
+
+        $scope.signedIn = false;
+        window.signedIn = $scope.signedIn;
+
+        $scope.onSignOut = onSignOut;
+        window.onSignOut = onSignOut;
+
+
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+            $scope.signedIn = true;
+            $scope.$apply();
+            console.log($scope.signedIn);
+        }
+
+        $scope.onSignIn = onSignIn;
+        window.onSignIn = onSignIn;
+
+        function onSignOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.onSignOut().then(function () {
+                console.log('User signed out.');
+                $scope.signedIn = false;
+                $scope.$apply();
+                console.log($scope.signedIn);
+            });
+        }
+
     }
 
     /* app controller for main content */
