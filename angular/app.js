@@ -1,7 +1,6 @@
 (function(){
     var app = angular.module('travelApp', []);
     app.controller('buttonsCtrl',funcButtonCtrl);
-    app.controller('mainCtrl', funcMainCtrl);
     app.directive('navbar',showNavbar);
     app.directive('tiles',showTiles);
     app.filter('lengthFormat',funcLengthFilter);
@@ -17,7 +16,12 @@
         startMap();
         bc.showIntro = true;
         bc.showRoute = false;
-        bc.showWaypoints=false;
+        bc.showWaypoints = false;
+        bc.descriptionShow = false;
+        bc.views = ['Mapa','Kafelki'];
+        bc.startPoint = 'Punkt startowy';
+        bc.endPoint = 'Punkt końcowy';
+        bc.currView = 'Zmień widok';
 
         window.gmapReady = function(){
 
@@ -47,6 +51,7 @@
                 },0);
             }
         };
+
         $scope.signedIn = false;
         $scope.signOut = signOut;
 
@@ -72,10 +77,7 @@
                 console.log($scope.signedIn);
             });
         }
-        bc.views = ['Mapa','Kafelki'];
-        bc.startPoint = 'Punkt startowy';
-        bc.endPoint = 'Punkt końcowy';
-        bc.currView = 'Zmień widok';
+
         bc.setStart = function(id,val){
             bc.startPoint = objects[id].name;
             bc.startId = id;
@@ -101,8 +103,10 @@
 
             if ((bc.startPoint !== 'Punkt startowy') && (bc.endPoint !== 'Punkt końcowy') && (bc.startPoint !== bc.endPoint)) {
                 bc.showRoute = true;
-                $('#map').css({'width':'75%'});
-                if (bc.currView === bc.views[1]) {startMap();}
+                $('#map').css({'width': '75%'});
+                if (bc.currView === bc.views[1]) {
+                    bc.setView('Mapa');
+                }
                 var i = 0;
                 startPosition = bc.startId;
                 endPosition = bc.endId;
@@ -130,34 +134,36 @@
                 }
                 walkingRouteForGoogle = walkingRoute[walkingRoute.length - 1].moves;
                 if (walkingRouteForGoogle.length > 2) {
-                    bc.showWaypoints=true;
-                    walkingRouteForGoogle.forEach(function(card,index){
-                        if (index !== 0 && index !== walkingRouteForGoogle.length-1) {
-                            var $card = $('#'+card).clone().removeClass('card slider').addClass('miniCard').attr('id','');
+                    bc.showWaypoints = true;
+                    walkingRouteForGoogle.forEach(function (card, index) {
+                        if (index !== 0 && index !== walkingRouteForGoogle.length - 1) {
+                            var $card = $('#' + card).clone().removeClass('card slider').addClass('miniCard').attr('id', '');
                             $card.find('.infoMarker').remove();
                             $('#waypointsCards').append($card);
 
                         }
                     });
                 } else {
-                    bc.showWaypoints=false;
+                    bc.showWaypoints = false;
                     $('#waypointsCards').children().remove();
                 }
                 bc.route = walkingRouteForGoogle;
-                initRoute(function(result){
-                    bc.distance = result.routes[0].legs.reduce(function(prev,curr){
+                initRoute(function (result) {
+                    bc.distance = result.routes[0].legs.reduce(function (prev, curr) {
                         return prev + curr.distance.value;
-                    },0);
-                    bc.duration = result.routes[0].legs.reduce(function(prev,curr){
+                    }, 0);
+                    bc.duration = result.routes[0].legs.reduce(function (prev, curr) {
                         return prev + curr.duration.value;
-                    },0);
-                    $scope.$apply(function(){
-                        bc.distance; bc.duration;
+                    }, 0);
+                    $scope.$apply(function () {
+                        bc.distance;
+                        bc.duration;
                     });
 
                 });
             }
         };
+
         $timeout(function(){
             $('#dropS').sortable({
                 items: "> .card",
@@ -215,52 +221,13 @@
             });
         }
 
-        $scope.signedIn = false;
-        window.signedIn = $scope.signedIn;
-
-        $scope.onSignOut = onSignOut;
-        window.onSignOut = onSignOut;
-
-
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail());
-            $scope.signedIn = true;
-            $scope.$apply();
-            console.log($scope.signedIn);
+        bc.showMonumentInfo = function(id){
+            bc.descriptionShow = true;
+            var $desc = $('#monumentDescription');
+            $desc.find('img').attr('src',bc.monuments[id].url);
+            $desc.find('h5').text(bc.monuments[id].name);
+            $desc.find('p').text(bc.monuments[id].description);
         }
-
-        $scope.onSignIn = onSignIn;
-        window.onSignIn = onSignIn;
-
-        function onSignOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.onSignOut().then(function () {
-                console.log('User signed out.');
-                $scope.signedIn = false;
-                $scope.$apply();
-                console.log($scope.signedIn);
-            });
-        }
-
-    }
-
-    /* app controller for main content */
-    function funcMainCtrl($scope){
-        var mc = this;
-        mc.showMonumentInfo = function(id){
-            $('#infoWindow').css({'width': '75%', 'height': '75%', 'overflow': 'auto','visibility': 'visible'});
-            $('h5', '#infoWindow').text(objects[id].name);
-            $('p', '#infoWindow').text(objects[id].description);
-            $('img', '#infoWindow').attr('src',objects[id].url);
-        };
-        mc.showInfoWindow = function(){
-            $('#infoWindow').css({'width': '0', 'height': '0'});
-            setTimeout(function(){$('#infoWindow').css({'visibility': 'hidden'})},1000)
-        };
 
     }
 

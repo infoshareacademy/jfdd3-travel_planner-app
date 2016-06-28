@@ -18,7 +18,6 @@ body {
 .cont {
     height: 100vh;
     background-color: #E4E4E4;
-    // overflow: hidden;
 }
 
 .main-container {
@@ -157,41 +156,28 @@ main {
 .card img, .miniCard img {
     max-width: 100%;
 }
-
-#infoWindow {
+#monumentDescription {
     position: absolute;
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 0;
-    height: 0;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(245, 245, 245, 1);
-    transition: width 1s, height 1s;
-    border: 1px solid #23b5b2;
-    border-radius: 10px;
-    overflow: hidden;
-    color: #228481;
-    text-shadow:1px 1px 10px #948c8e;
-    box-shadow:3px 3px 6px black;
-    z-index: 9999;
+    left: 5%;
+    top: 5%;
+    width: 90%;
+    height: 90vh;
+    background-color: whitesmoke;
+    z-index: 1;
 }
-#infoWindow span, #routeWindow span {
-    align-self: flex-end;
-    padding: 0 10px 0;
+.desc {
+
+    width: 48%;
+    padding: 1%;
+    float: left;
 }
-#infoWindow h5 {
-    align-self: center;
+.desc > img {
+    max-width: 100%;
 }
-#infoWindow p {
-    padding: 10px;
-}
-#infoWindow img {
-    width: 40%;
-    height: 40%;
-    align-self: center;
+.desc > h5 {
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
 }
 
 .infoMarker {

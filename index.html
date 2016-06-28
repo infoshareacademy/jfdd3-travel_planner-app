@@ -31,11 +31,14 @@
     <![endif]-->
 </head>
 <body ng-controller="buttonsCtrl as bc">
-<div id="intro" ng-show="bc.showIntro">
+<div id="intro" ng-show="bc.showIntro"></div>
+<div id="monumentDescription" ng-show="bc.descriptionShow" ng-click="bc.descriptionShow = false">
+    <div class="desc"><img></div>
+    <div class="desc"><h5></h5><p></p></div>
 </div>
 <div class="cont">
     <navbar></navbar>
-    <main ng-controller="mainCtrl as mc">
+    <main>
         <div id="route" ng-show="bc.showMap && bc.showRoute" class="animate-show">
             <p><strong>Twoja trasa:</strong></p>
             <ol>
@@ -48,7 +51,6 @@
         </div>
         <div id="map" ng-show="bc.showMap"></div>
         <tiles ng-hide="bc.showMap"></tiles>
-        <div id="infoWindow"><span ng-click="mc.showInfoWindow()">X</span><img><h5></h5><p></p></div>
     </main>
 </div>
 
