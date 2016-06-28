@@ -1,8 +1,7 @@
 <nav class="navbar navbar-light bg-faded">
     <div class="nav navbar-nav pull-right">
         <div class="groupped-menu">
-{{bc.signedIn}}
-            <div class="g-signin2" ng-hide="bc.signedIn" data-onsuccess="onSignIn()"></div>
+            <div class="g-signin2" ng-hide="bc.signedIn" data-onsuccess="onSignIn"></div>
             <button type="button" id="signOutButton" ng-click="bc.onSignOut()" ng-show="bc.signedIn">Sign out</button>
 
             <div class="dropdown">
