@@ -52,7 +52,7 @@ main {
     padding: 2px;
 }
 
-.btn-primary, #singOutButton {
+.btn-primary, #signOutButton {
     background-color: rgb(35, 181, 178);
     border-color: rgb(35, 181, 178);
     color: white;
@@ -64,7 +64,7 @@ main {
 
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary, #singOutButton:hover {
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary, #signOutButton:hover {
     background-color: rgb(238, 186, 76);
     border-color: rgb(238, 186, 76);
 }
@@ -76,7 +76,7 @@ main {
 .groupped-menu {
     margin-top: 2%;
 }
-#singOutButton {
+#signOutButton {
     display: inline-block;
     padding: .375rem 1rem;
     font-size: 1rem;

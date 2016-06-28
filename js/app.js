@@ -28,8 +28,7 @@
                 console.log($scope.signedIn);
             });
         }
-
-
     });
+    
 })();
 
