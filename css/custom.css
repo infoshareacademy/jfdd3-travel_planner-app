@@ -225,6 +225,7 @@ main {
     overflow: hidden;
     box-shadow:1px 1px 3px black;
     background-color: white;
+    text-align: center;
 }
 .miniCard h5 {
     font-size: medium;

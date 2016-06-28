@@ -132,7 +132,7 @@
                     bc.showWaypoints = true;
                     walkingRouteForGoogle.forEach(function (card, index) {
                         if (index !== 0 && index !== walkingRouteForGoogle.length - 1) {
-                            var $card = $('#' + card).clone().removeClass('card slider').addClass('miniCard').attr('id', '');
+                            var $card = $('<div>').addClass('miniCard').append($('<img>').attr('src',bc.monuments[card].url)).append($('<h5>').text(bc.monuments[card].name));
                             $card.find('.infoMarker').remove();
                             $('#waypointsCards').append($card);
 
