@@ -1,0 +1,41 @@
+<nav class="navbar navbar-light bg-faded">
+    <div class="nav navbar-nav pull-right">
+        <div class="groupped-menu">
+            <div class="g-signin2" ng-hide="bc.signedIn" data-onsuccess="onSignIn"></div>
+            <button type="button" id="signOutButton" ng-click="bc.onSignOut()" ng-show="bc.signedIn">Sign out</button>
+
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.startPoint}}
+                </button>
+                <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
+                    <button class="dropdown-item start-item" ng-repeat="monument in bc.monuments" ng-click="bc.setStart(monument.id)">{{monument.name}}</button>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.endPoint}}
+                </button>
+                <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu">
+                    <button class="dropdown-item end-item" ng-repeat="monument in bc.monuments" ng-click="bc.setEnd(monument.id)">{{monument.name}}</button>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary" type="button" id="btnShowMeTheWay" ng-click="bc.showWay()">Wyznacz trasę</button>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="changeViewsdsd"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.currView}}
+                </button>
+                <div class="dropdown-menu" id="changeView" aria-labelledby="changeView">
+                    <button class="dropdown-item view-item" ng-repeat="view in bc.views" ng-click="bc.setView(view)">{{view}}</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="nav navbar-nav pull-left">
+        <a class="nav-item nav-link pull-left" id="logo" href="#"><img src="images/logo.png" alt="TravelPlanner"> </a>
+    </div>
+</nav>

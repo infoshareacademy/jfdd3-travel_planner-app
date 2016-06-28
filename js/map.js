@@ -1,17 +1,11 @@
 'use strict';
 
-var map;
-var infowindow;
-var markers = [];
-var directionsService;
-var directionsDisplay;
-var waypts;
+var map, infowindow, directionsService, directionsDisplay, googleRes;
+var objects, waypts, startPosition, endPosition;
+var walkingRouteForGoogle = [];
 
-
-
-function initMap() {
-
-
+function initMap(){
+    var markers = [];
     var bounds = new google.maps.LatLngBounds();
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -27,7 +21,6 @@ function initMap() {
 
     google.maps.event.addListener(infowindow, 'domready', function () {
         $('.info_content').closest('.gm-style-iw').parent().addClass('custom-iw');
-
     });
 
     var marker, i;
@@ -50,9 +43,9 @@ function initMap() {
             '<img src=' + objects[i].url + '>' +
             '<p>' + objects[i].description + '</p>' +
             '<div class="infoWindowButtons"> ' +
-            '<button type="button" class="btn btn-primary infoWindowBtnStart" id="' + objects[i].name + '"> ' +
+            '<button type="button" class="btn btn-primary infoWindowBtnStart" ng-click="bc.setStart(0)"> ' +
             "Początek trasy" + '</button>' +
-            '<button type="button" class="btn btn-primary infoWindowBtnEnd" id="' + objects[i].name + '">' +
+            '<button type="button" class="btn btn-primary infoWindowBtnEnd" ng-click="bc.setEnd(0)">' +
             "Koniec trasy" + '</button>' +
             '</div>' +
             '</div>'
@@ -87,14 +80,6 @@ function initMap() {
                 infowindow.open(map, marker);
 
 
-                //change button text in top menu
-                $('.infoWindowBtnStart').on('click', function () {
-                    $('#startPointDropdownMenu').text($(this).attr('id'));
-                });
-                $('.infoWindowBtnEnd').on('click', function () {
-                    $('#endPointDropdownMenu').text($(this).attr('id'));
-                });
-
                 // //adds toggle bounce to marker on click
                 // if (marker.getAnimation() !== null) {
                 //     marker.setAnimation(null);
@@ -115,8 +100,7 @@ function initMap() {
     directionsDisplay.setMap(map);
 }
 
-function initRoute() {
-
+function initRoute(callbackToShowWay) {
 
 
     calculateAndDisplayRoute(directionsService, directionsDisplay);
@@ -124,9 +108,9 @@ function initRoute() {
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         waypts = [];
-        for (var i = 1; i < walkingRoute2.length-1; i++) {
+        for (var i = 1; i < walkingRouteForGoogle.length-1; i++) {
             waypts.push({
-                location: ""+ objects[walkingRoute2[i]].position[0] + "," + objects[walkingRoute2[i]].position[1],
+                location: ""+ objects[walkingRouteForGoogle[i]].position[0] + "," + objects[walkingRouteForGoogle[i]].position[1],
                 stopover: true
             });
         }
@@ -143,27 +127,16 @@ function initRoute() {
     }, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(response);
-            // this part print out route steps
-            // var walkingRoute = response.routes[0];
-            // var summaryPanel = document.getElementById('directions-panel');
-            // summaryPanel.innerHTML = '';
-            // // For each walkingRoute, display summary information.
-            // for (var i = 0; i < walkingRoute.legs.length; i++) {
-            //     var routeSegment = i + 1;
-            //     summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-            //         '</b><br>';
-            //     summaryPanel.innerHTML += walkingRoute.legs[i].start_address + ' to ';
-            //     summaryPanel.innerHTML += walkingRoute.legs[i].end_address + '<br>';
-            //     summaryPanel.innerHTML += walkingRoute.legs[i].distance.text + '<br><br>';
-            // }
+            callbackToShowWay(response);
+
         } else {
             window.alert('Directions request failed due to ' + status);
         }
     });
-    // czyszczenie tablic po wyliczeniu tablic - tymczasowy kod
+    // czyszczenie tablic po wyliczeniu tablic
     waypts = [];
-    walkingRoute2 = [];
 }
+
 
 
 

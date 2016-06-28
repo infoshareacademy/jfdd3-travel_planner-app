@@ -1,18 +1,23 @@
 /* GENERAL STYLES
 -------------------------------------------------*/
 body {
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Open Sans Condensed', sans-serif ;
     font-size: 1em;
     color: #777;
     font-weight: 300;
     line-height: 1.7;
-    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
+
+/* glyphicon font*/
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
+
 
 .cont {
     height: 100vh;
     background-color: #E4E4E4;
-    overflow: hidden;
 }
 
 .main-container {
@@ -21,15 +26,35 @@ body {
 }
 main {
     position: relative;
+    display: flex;
 }
+
 #logo {
     width: 100%;
     height: 100%;
 }
+.g-signin2 {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    padding: 2px;
+}
 
-.btn-primary {
+.btn-primary, #signOutButton {
     background-color: rgb(35, 181, 178);
     border-color: rgb(35, 181, 178);
+    color: white;
 }
 
 .btn:hover {
@@ -38,7 +63,7 @@ main {
 
 }
 
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary, #signOutButton:hover {
     background-color: rgb(238, 186, 76);
     border-color: rgb(238, 186, 76);
 }
@@ -50,6 +75,25 @@ main {
 .groupped-menu {
     margin-top: 2%;
 }
+#signOutButton {
+    display: inline-block;
+    padding: .375rem 1rem;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    margin-right: 3px;
+}
+
 
 .card {
     background-color: white;
@@ -60,7 +104,6 @@ main {
     border-radius: 5px;
     overflow: hidden;
     box-shadow:3px 3px 6px black;
-    z-index: 1000;
 }
 .dropplace {
     width: 180px;
@@ -110,62 +153,31 @@ main {
     overflow: hidden;
     margin: 0 30px 0;
 }
-.card img {
+.card img, .miniCard img {
     max-width: 100%;
 }
-
-#routeWindow {
+#monumentDescription {
     position: absolute;
-    // visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 0;
-    height: 0;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(228, 228, 228, 0.9);
-    transition: width 1s, height 1s;
-    border: 1px solid #23b5b2;
-    border-radius: 10px;
-    overflow: hidden;
-    color: #23b5b2;
+    left: 5%;
+    top: 5%;
+    width: 90%;
+    height: 90vh;
+    background-color: whitesmoke;
+    z-index: 1;
 }
+.desc {
 
-#infoWindow {
-    position: absolute;
-    visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 0;
-    height: 0;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(245, 245, 245, 1);
-    transition: width 1s, height 1s;
-    border: 1px solid #23b5b2;
-    border-radius: 10px;
-    overflow: hidden;
-    color: #228481;
-    text-shadow:1px 1px 10px #948c8e;
-    box-shadow:3px 3px 6px black;
-    z-index: 9999;
+    width: 48%;
+    padding: 1%;
+    float: left;
 }
-#infoWindow span, #routeWindow span {
-    align-self: flex-end;
-    padding: 0 10px 0;
+.desc > img {
+    max-width: 100%;
 }
-#infoWindow h5 {
-    align-self: center;
-}
-#infoWindow p {
-    padding: 10px;
-}
-#infoWindow img {
-    width: 40%;
-    height: 40%;
-    align-self: center;
+.desc > h5 {
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
 }
 
 .infoMarker {
@@ -181,4 +193,40 @@ main {
     right: 10px;
     width: 50px;
     height: 50px;
+}
+
+#route {
+    padding-left: 20px;
+    width: 25%;
+    height: 100%;
+    background-color: #f7f7f9
+}
+#intro{
+    width: 100%;
+    height: 100%;
+    background-color: #f7f7f9;
+    background-image: url(../images/logo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+#route ol {
+    list-style-type: upper-alpha;
+}
+#waypointsCards {
+    display: flex;
+    align-items: center;
+}
+.miniCard{
+    width: 123px;
+    height: 150px;
+    margin: 5px;
+    border: none;
+    border-radius: 2px;
+    overflow: hidden;
+    box-shadow:1px 1px 3px black;
+    background-color: white;
+    text-align: center;
+}
+.miniCard h5 {
+    font-size: medium;
 }
