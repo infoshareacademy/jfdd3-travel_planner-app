@@ -1,8 +1,4 @@
 'use strict';
-var startPosition, endPosition;
-var walkingRoute = [];
-var walkingRoute2 = [];
-
 
 $(document).ready(function() {
 
@@ -26,10 +22,5 @@ $(document).ready(function() {
     //setTimeout(function) {
     //    $('.abcRioButton').hover
     //}
-
-
-    $('#intro').on('click', function () {
-        introJs().start();
-    });
 
 });
