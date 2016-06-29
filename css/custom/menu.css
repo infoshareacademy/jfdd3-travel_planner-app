@@ -69,3 +69,9 @@
     border-radius: .25rem;
     margin-right: 1%;
 }
+/* adds scrolling to dropdown menu's item list*/
+.scrollable-menu {
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
+}

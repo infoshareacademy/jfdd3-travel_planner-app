@@ -11,7 +11,7 @@
                 <button class="btn btn-primary dropdown-toggle" type="button" id="startPointDropdownMenu"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.startPoint}}
                 </button>
-                <div class="dropdown-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
+                <div class="dropdown-menu scrollable-menu" id="startDropped" aria-labelledby="startPointDropdownMenu">
                     <button class="dropdown-item start-item" ng-repeat="monument in bc.monuments" ng-click="bc.setStart(monument.id)">{{monument.name}}</button>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <button class="btn btn-primary dropdown-toggle" type="button" id="endPointDropdownMenu"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{bc.endPoint}}
                 </button>
-                <div class="dropdown-menu" id="endDropped" aria-labelledby="endPointDropdownMenu">
+                <div class="dropdown-menu scrollable-menu" id="endDropped" aria-labelledby="endPointDropdownMenu">
                     <button class="dropdown-item end-item" ng-repeat="monument in bc.monuments" ng-click="bc.setEnd(monument.id)">{{monument.name}}</button>
                 </div>
             </div>

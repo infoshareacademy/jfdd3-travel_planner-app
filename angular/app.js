@@ -167,37 +167,39 @@
                     });
 
                 });
-                //    save route to local storage
 
-                //array for storing/updating local storage data
+                /*    save route to local storage */
+                saveToLocalStorage()
+
+            }
+
+            function saveToLocalStorage() {
+                // array for storing/updating local storage data
                 var savedRoutes = [];
+                // array holding currently viewed route
                 var routeToSave = bc.route;
+                // if local storage isn't empty do:
                 if(localStorage.length !== 0) {
+                    // parse JSON array of objects to an array
                     savedRoutes = JSON.parse(localStorage.savedRoutes);
-                    console.log(JSON.parse(localStorage.savedRoutes));
                     // iterate through array, check if logged user is same ase  user in local storage and add new route
-                    console.log("przed petla");
-                    console.log("przed petla, savedRoutes.length: " + [savedRoutes].length);
-
                     for (var j = 0; j < savedRoutes.length; j++) {
-                        console.log("w petli");
                         //TODO  remove ' ' around profileId
-                        // console.log("user id : " + savedRoutes[j].userId);
-                        if ('profileId' == savedRoutes[j].userId) {
-                            // console.log("saved routes from local storage: " + savedRoutes[0]);
-                            // console.log(routeToSave)
-
+                        // if profileId in object is equal to current user google id token
+                        if ('profileId' === savedRoutes[j].userId) {
+                            // push currently viewed route to logged in user's route array
                             savedRoutes[j].route.push(routeToSave);
-                            console.log(JSON.stringify(savedRoutes[j]));
+                            // send whole array of objects back to local storage overwriting what's there
                             localStorage.setItem("savedRoutes", JSON.stringify(savedRoutes));
                         }
                     }
                 } else {
                     //TODO  remove ' ' around profileId
+                    //  if local storage is empty send current user id token and currently viewed route to local storage
                     localStorage.setItem('savedRoutes', JSON.stringify([{userId: 'profileId', route: [routeToSave] }]));
                 }
-
             }
+
         };
 
         $timeout(function(){
@@ -304,4 +306,6 @@
             return duration;
         }
     }
+
+
 })();
