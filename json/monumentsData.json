@@ -64,13 +64,13 @@
       8,
       19
     ],
-    "name": "Katedra Św. Mikołaja",
+    "name": "Bazylika Św. Mikołaja",
     "position": [
       54.352039,
       18.651948
     ],
-    "url": "images/kosciolkatarzyny.jpg",
-    "description": "Najstarszy kościół parafialny na Starym Mieście w Gdańsku. Powstał w latach 1227-1239, fundatorami byli książęta Pomorza Gdańskiego, rozbudowany został w XIV w. W latach 1555-1945 należał do protestantów. Jego patronką jest św. Katarzyna Aleksandryjska z Egiptu. Mierząca 76 m wieża kościoła jest zwieńczona barokowym hełmem autorstwa Jacoba van den Blocka. W świątyni znajdują się obrazy Antona Möllera i Izaaka van den Blocka, jak również barokowe epitafia i płyta nagrobna astronoma Jana Heweliusza z 1659 roku. Szczególnym zabytkiem jest znajdujący się tam obraz Matki Boskiej Bołszowieckiej z Bołszowiec."
+    "url": "images/bazylikaswmikolaja.jpg",
+    "description": "Jedna z najstarszych świątyń w Gdańsku, powstała u schyłku XII wieku. Pierwszy mały kościół, pod wezwaniem św. Mikołaja, został wybudowany najprawdopodobniej w 1185. Powstał na skrzyżowaniu dwóch ważnych szlaków handlowych: starożytnej drogi kupców (via mercatorum) i traktu wiodącego z gdańskiego zamku do książęcych posiadłości na Pomorzu. Kościół od początku służył zarówno ludności miejscowej, jak i przybywającym do Gdańska ze wszystkich stron świata kupcom i żeglarzom."
   },
   {
     "id": 5,
@@ -116,7 +116,7 @@
       54.349063,
       18.651068
     ],
-    "url": "images/domferberow.jpg",
+    "url": "images/dferberow.jpg",
     "description": "Zwany Adam i Ewa. Kamienica zbudowana w 1560 w stylu renesansowym, zwieńczona herbami Polski, Gdańska i Prus Królewskich, zdobiona pilastrami, posągami i medalionem. Budynek jest udekorowany fryzem z motywami niderlandzkimi. Dom Ferberów należał do rodziny Ferberów, jednej z najbardziej wpływowych w Gdańsku, dała ona miastu: 6 burmistrzów, 3 ławników, 6 rajców, 3 kanoników i 1 biskupa.Drzwi wejściowe do kamienicy były zdobione figurami Adama i Ewy, o których legenda głosiła, że są siedliskiem diabelskiej mocy. Z tego powodu, od 1786, po śmierci ostatniego potomka rodu Ferberów kamienica przez długi czas była niezamieszkana, dopiero po przebudowie i usunięciu drzwi wierzący w tę legendę uznali, że klątwa przestała ciążyć nad kamienicą. "
   },
   {
@@ -279,8 +279,8 @@
       54.349877,
       18.657206
     ],
-    "url": "images/bramachlebnicka.jpg",
-    "description": "Jedna z zabytkowych bram wodnych w Gdańsku, nad Motławą. Znajduje się przy Długim Pobrzeżu, u wylotu ulicy Chlebnickiej na Głównym Mieście. W swojej obecnej gotyckiej formie pochodzi z XV wieku, przy czym jest ona najstarszą z trzech zachowanych późnogotyckich bram wodnych – wskazuje na to nie tylko jej forma architektoniczna, ale także umieszczony nad przejazdem od strony Motławy herb Gdańska – dwa srebrne krzyże na tarczy w polu czerwonym, jeszcze bez dodanej w 1457 korony. Z kolei od strony ul. Chlebnickiej nad przejazdem umieszczono znak, obecnie najczęściej interpretowany jako lilia – dawny herb książąt Pomorza Gdańskiego z dynastii Sobiesławiców."
+    "url": "images/bramaswducha.jpg",
+    "description": "Jedna z zabytkowych bram wodnych w Gdańsku. Znajduje się u wylotu ul. św. Ducha, na Długim Pobrzeżu. Brama ta istniała już w 1378 roku. Znana była wtedy jako brama „dolna”. W połowie XV wieku uzyskała kształt znany z zaginionego obrazu Antoniego Möllera z 1603 roku. Fasadę zdobiła podwójna wnęka i ażurowa attyka, usunięta w XIX wieku. W XVI wieku brama utraciła charakter militarny i została zaadaptowana na mieszkania oraz warsztaty. Ostateczne zatracenie historycznej formy spowodowały przebudowy w XIX wieku."
   },
   {
     "id": 19,
