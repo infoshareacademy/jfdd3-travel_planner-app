@@ -49,6 +49,7 @@
             <p>{{bc.distance | lengthFormat}}</p>
             <p><strong>Czas przejścia:</strong></p>
             <p>{{bc.duration | dateFormat}}</p>
+            <button class="btn btn-primary" id="resetRoute" ng-click="bc.deleteRoute()">Usuń trasę</button>
         </div>
         <div id="map" ng-show="bc.showMap"></div>
         <tiles ng-hide="bc.showMap"></tiles>

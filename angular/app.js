@@ -161,6 +161,14 @@
             }
         };
 
+        bc.deleteRoute = function(){
+            bc.showRoute = false;
+            $('#map').css({'width': '100%'});
+            directionsDisplay.setMap(null);
+            directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsDisplay.setMap(map);
+        };
+
         $timeout(function(){
             $('#dropS').sortable({
                 items: "> .card",

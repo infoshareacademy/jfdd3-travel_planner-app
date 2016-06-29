@@ -1,6 +1,6 @@
 'use strict';
 
-var map, infowindow, directionsService, directionsDisplay, googleRes;
+var map, infowindow, directionsService, directionsDisplay;
 var objects, waypts, startPosition, endPosition;
 var walkingRouteForGoogle = [];
 
