@@ -41,7 +41,7 @@
     <navbar></navbar>
     <main>
         <div id="route" ng-show="bc.showMap && bc.showRoute" class="animate-show">
-            <p><strong>Twoja trasa:</strong></p>
+            <p><strong>{{bc.signedIn ? bc.name+', ' : ''}}Twoja trasa:</strong></p>
             <ol>
             <li ng-repeat="point in bc.route">{{bc.monuments[point].name}}</li>
             </ol>

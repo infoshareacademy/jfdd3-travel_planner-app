@@ -1528,4 +1528,4 @@ setTimeout(function() {
         }
     });
 
-},0);
+},200);
