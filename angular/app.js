@@ -38,7 +38,7 @@
                     showResponse(data);
                 })
                 .fail(function () {
-                    $('#intro').text('Wystąpił problem z aplikacją. Spróbuj ponownie później.')
+                    $('#intro').append($('<p>').text('Wystąpił problem z aplikacją. Spróbuj ponownie później.'));
                 });
 
             function showResponse(data) {
