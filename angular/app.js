@@ -91,9 +91,11 @@
         bc.setView = function(view) {
             bc.currView = view;
             if (view === bc.views[0]) {
+                $('body').css({'overflow': 'hidden'});
                 startMap();
             } else if (view === bc.views[1]){
                 startTiles();
+                $('body').css({'overflow': 'auto'});
             }
         };
 
@@ -102,6 +104,7 @@
             if ((bc.startPoint !== 'Punkt startowy') && (bc.endPoint !== 'Punkt końcowy') && (bc.startPoint !== bc.endPoint)) {
                 bc.showRoute = true;
                 $('#map').css({'width': '75%'});
+                $('#waypointsCards').children().remove();
                 if (bc.currView === bc.views[1]) {
                     bc.setView('Mapa');
                 }
@@ -164,6 +167,13 @@
 
         bc.deleteRoute = function(){
             bc.showRoute = false;
+            bc.startPoint = 'Punkt startowy';
+            bc.endPoint = 'Punkt końcowy';
+            $('#dropS').children().remove();
+            $('#dropE').children().remove();
+            $('#dropS').append($('<div>').addClass('dropplace').text('Przeciągnij element, który chcesz ustawić jako punkt startowy'));
+            $('#dropE').append($('<div>').addClass('dropplace').text('Przeciągnij element, który chcesz ustawić jako punkt końcowy'));
+            $('#waypointsCards').children().remove();
             $('#map').css({'width': '100%'});
             directionsDisplay.setMap(null);
             directionsDisplay = new google.maps.DirectionsRenderer;
