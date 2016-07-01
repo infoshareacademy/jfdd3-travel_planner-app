@@ -1,3 +1,63 @@
+.col-menu-logo {
+    margin-left: 1%;
+}
+
+@media (max-width: 1080px) {
+    .col-menu-logo {
+        width: 98%;
+    }
+
+    .col-menu-logo img {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .col-menu-buttons {
+        width: 97%;
+    }
+
+    .groupped-menu {
+        margin: 0 auto;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.col-menu-buttons {
+    margin-right: 1%;
+}
+
+
+@media (max-width: 767px) {
+    .groupped-menu {
+        flex-direction: column;
+    }
+
+    .groupped-menu button {
+        width: 300px;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    .g-signin2 {
+        width: 300px;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+
+    #signOutButton {
+        width: 300px;
+        margin-top: 1%;
+        margin-bottom: 1%;
+    }
+}
+
+
+
+
+
 .groupped-menu {
     display: inline-flex;
 }

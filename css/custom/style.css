@@ -143,6 +143,13 @@ main {
     background-image: url(../../images/logo.png);
     background-position: center;
     background-repeat: no-repeat;
+    font-size: larger;
+    text-align: center;
+}
+#intro p {
+    color: white;
+    padding: 3px 0px 3px;
+    background-color: red;
 }
 #route ol {
     list-style-type: upper-alpha;

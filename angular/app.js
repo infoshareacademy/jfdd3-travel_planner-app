@@ -43,7 +43,7 @@
                     showResponse(data);
                 })
                 .fail(function () {
-                    $('#intro').text('Wystąpił problem z aplikacją. Spróbuj ponownie później.')
+                    $('#intro').append($('<p>').text('Wystąpił problem z aplikacją. Spróbuj ponownie później.'));
                 });
 
             function showResponse(data) {
@@ -67,6 +67,7 @@
             profileId = googleUser.getAuthResponse().id_token;
 
             console.log('Name: ' + profile.getName());
+            bc.name = profile.getName().split(' ')[0];
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail());
             $scope.$apply(bc.signedIn = true);
@@ -239,6 +240,14 @@
                     }
                 });
             }
+        };
+
+        bc.deleteRoute = function(){
+            bc.showRoute = false;
+            $('#map').css({'width': '100%'});
+            directionsDisplay.setMap(null);
+            directionsDisplay = new google.maps.DirectionsRenderer;
+            directionsDisplay.setMap(map);
         };
 
         $timeout(function(){
