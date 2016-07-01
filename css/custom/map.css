@@ -1,32 +1,10 @@
 #map {
-
     width: 100%;
     height: 100%;
 }
 
 main {
     height: 95%;
-}
-.infoWindowButtons {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-}
-
-.infoWindowBtnStart {
-    margin: 1% 1% 1% 1%;
-    width: 60%;
-    border-radius: .25rem;
-
-
-}
-
-.infoWindowBtnEnd {
-    margin: 1% 1% 1% 1%;
-    width: 60%;
-    border-radius: .25rem;
-
 }
 
 .info_content {
@@ -62,7 +40,6 @@ main {
     border-radius: 12px 12px 12px 12px;
 
 }
-
 
 .custom-iw .gm-style-iw {
     top:0 !important;

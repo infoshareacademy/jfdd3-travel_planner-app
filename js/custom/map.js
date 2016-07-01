@@ -42,12 +42,6 @@ function initMap(){
             '<h3>' + objects[i].name + '</h3>' +
             '<img src=' + objects[i].url + '>' +
             '<p>' + objects[i].description + '</p>' +
-            '<div class="infoWindowButtons"> ' +
-            '<button type="button" class="btn btn-primary infoWindowBtnStart" ng-click="bc.setStart(0)"> ' +
-            "Początek trasy" + '</button>' +
-            '<button type="button" class="btn btn-primary infoWindowBtnEnd" ng-click="bc.setEnd(0)">' +
-            "Koniec trasy" + '</button>' +
-            '</div>' +
             '</div>'
         );
     }

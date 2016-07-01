@@ -13,7 +13,7 @@
     /* app controller for navigation buttons */
     function funcButtonCtrl($scope,$timeout) {
         var bc = this;
-        startMap();
+        bc.showMap = true;
         bc.showIntro = true;
         bc.showRoute = false;
         bc.showWaypoints = false;
@@ -91,11 +91,9 @@
         bc.setView = function(view) {
             bc.currView = view;
             if (view === bc.views[0]) {
-                $('body').css({'overflow': 'hidden'});
                 startMap();
             } else if (view === bc.views[1]){
                 startTiles();
-                $('body').css({'overflow': 'auto'});
             }
         };
 
@@ -103,7 +101,6 @@
 
             if ((bc.startPoint !== 'Punkt startowy') && (bc.endPoint !== 'Punkt końcowy') && (bc.startPoint !== bc.endPoint)) {
                 bc.showRoute = true;
-                $('#map').css({'width': '75%'});
                 $('#waypointsCards').children().remove();
                 if (bc.currView === bc.views[1]) {
                     bc.setView('Mapa');
@@ -184,8 +181,7 @@
             $('#dropS').sortable({
                 items: "> .card",
                 receive: function (event,ui) {
-                    $('#dropS').find('.dropplace').remove();
-                    if ($('#dropS').find('.card').length > 1) {
+                    if ($('#dropS').children().length > 1) {
                         $('#dropS').find('.card').eq(1).remove()
                     }
                     $('#waypointsCards').children().remove();
@@ -199,8 +195,7 @@
             $('#dropE').sortable({
                 items: "> .card",
                 receive: function (event,ui) {
-                    $('#dropE').find('.dropplace').remove();
-                    if ($('#dropE').find('.card').length > 1) {
+                    if ($('#dropE').children().length > 1) {
                         $('#dropE').find('.card').eq(1).remove()
                     }
                     $('#waypointsCards').children().remove();
@@ -215,9 +210,11 @@
 
         function startMap(){
             bc.showMap = true;
+            $('body').css({'overflow-y': 'hidden'});
         }
         function startTiles() {
             bc.showMap = false;
+            $('body').css({'overflow-y': 'auto'});
             setTimeout(function () {
                 $('#drag').bxSlider({
                     slideWidth: 180,
