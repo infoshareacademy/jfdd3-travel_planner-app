@@ -89,3 +89,9 @@ main {
     padding:6px;
 }
 
+/* adds scrolling to dropdown menu's item list*/
+.scrollable-menu {
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
+}

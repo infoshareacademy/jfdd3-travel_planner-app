@@ -6,10 +6,6 @@
     app.filter('lengthFormat',funcLengthFilter);
     app.filter('dateFormat',funcDateFilter);
 
-
-
-
-      
     /* app controller for navigation buttons */
     function funcButtonCtrl($scope,$timeout) {
         var bc = this;
@@ -23,6 +19,15 @@
         bc.startPoint = 'Punkt startowy';
         bc.endPoint = 'Punkt końcowy';
         bc.currView = 'Zmień widok';
+        //global var for user's id token from Google
+        var profileId;
+        //url to API
+        var url = 'https://mysterious-taiga-39537.herokuapp.com/api/userData';
+        // array for storing/updating local storage data
+        var savedRoutes;
+        // array holding currently viewed route
+        var routeToSave;
+
 
         window.gmapReady = function(){
 
@@ -57,13 +62,27 @@
         window.onSignIn = function(googleUser) {
             var profile = googleUser.getBasicProfile();
             console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+
+            //  Get user id token and store it in global variable
+            // profileId = googleUser.getAuthResponse().id_token;
+            profileId = profile.getEmail();
+            console.log(profileId);
+
             console.log('Name: ' + profile.getName());
             bc.name = profile.getName().split(' ')[0];
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail());
             $scope.$apply(bc.signedIn = true);
             console.log(bc.signedIn);
+
+            //  get last searched route using API
+              getFromRemoteAPI();
+
+
         };
+
+
+
 
         bc.onSignOut = function() {
             var auth2 = gapi.auth2.getAuthInstance();
@@ -73,6 +92,9 @@
                 console.log(bc.signedIn);
             });
         };
+
+
+
 
         bc.setStart = function(id,val){
             bc.startPoint = objects[id].name;
@@ -159,8 +181,79 @@
                     });
 
                 });
+
+                /*    save route to local storage */
+                saveToLocalStorage();
+                postToRemoteAPI();
+            }
+
+            function saveToLocalStorage() {
+                // array for storing/updating local storage data
+                savedRoutes = [];
+                // array holding currently viewed route
+                routeToSave = bc.route;
+                // if local storage isn't empty do:
+                if(localStorage.length !== 0) {
+                    // parse JSON array of objects to an array
+                    savedRoutes = JSON.parse(localStorage.savedRoutes);
+                    // iterate through array, check if logged user is same ase  user in local storage and add new route
+                    for (var j = 0; j < savedRoutes.length; j++) {
+                        // if profileId in object is equal to current user google id token
+                        if (profileId === savedRoutes[j].userId) {
+                            // push currently viewed route to logged in user's route array
+                            savedRoutes[j].route.push(routeToSave);
+                            // send whole array of objects back to local storage overwriting what's there
+                            localStorage.setItem("savedRoutes", JSON.stringify(savedRoutes));
+                        }
+                    }
+                } else {
+                    //  if local storage is empty send current user id token and currently viewed route to local storage
+                    localStorage.setItem('savedRoutes', JSON.stringify([{userId: profileId, route: [routeToSave] }]));
+                }
             }
         };
+
+        // self explanatory...
+        function getFromRemoteAPI() {
+           return $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                async: true,
+                success: function(result, status) {
+                    console.info("Get from API: " + status);
+                    var downloadedRoutes = result.filter(function (element) {
+                        return element.profileId === profileId;
+                    });
+                    // TODO wylap bledy i inne pierdoly
+                    // tu odpal wyswietlenie ostatnio wyszukanej trasy
+                    if(downloadedRoutes.length >0) {
+                    var lastRoute = downloadedRoutes[downloadedRoutes.length-1].route;
+                    bc.setStart(lastRoute[0],true);
+                    bc.setEnd(lastRoute[lastRoute.length -1], true);
+                    bc.showWay();
+                    }
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        }
+
+        function postToRemoteAPI() {
+            $.ajax({
+                type: 'POST',
+                url: url,
+                contentType: 'application/json',
+                data: JSON.stringify({profileId: profileId, route: routeToSave }),
+                success: function(result, status) {
+                    console.info("Post to API: " + status)
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        }
 
         bc.deleteRoute = function(){
             bc.showRoute = false;
@@ -224,7 +317,7 @@
                     slideMargin: 20
                 });
             }, 0);
-            
+
             objects.forEach(function (monument) {
                 $('#' + monument.id).draggable({
                     connectToSortable: "#dropS, #dropE",
@@ -281,4 +374,6 @@
             return duration;
         }
     }
+
+
 })();
