@@ -28,7 +28,10 @@ function initMap(){
 
 
 // Automatically center the map, fitting all markers on the screen
-    map.fitBounds(bounds);
+    setTimeout(function() {
+        map.fitBounds(bounds);
+    },100);
+
 
 // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
     var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
@@ -78,14 +81,6 @@ function initMap(){
             return function () {
                 infowindow.setContent(infoWindowContent[i]);
                 infowindow.open(map, marker);
-
-
-                // //adds toggle bounce to marker on click
-                // if (marker.getAnimation() !== null) {
-                //     marker.setAnimation(null);
-                // } else {
-                //     marker.setAnimation(google.maps.Animation.BOUNCE);
-                // }
             }
         })(marker, i));
         //Add new marker to list of markers (to keep track of them)
@@ -101,7 +96,6 @@ function initMap(){
 }
 
 function initRoute(callbackToShowWay) {
-
 
     calculateAndDisplayRoute(directionsService, directionsDisplay);
 
@@ -119,10 +113,7 @@ function initRoute(callbackToShowWay) {
     directionsService.route({
         origin: "" + objects[startPosition].position[0] + ","  +  objects[startPosition].position[1],
         destination: "" + objects[endPosition].position[0] + ","  +  objects[endPosition].position[1],
-        // origin: "" + objects[startPosition].position[0] + ","  +  objects[startPosition].position[1],
-        // destination: "" + objects[endPosition].position[0] + "," + objects[endPosition].position[1],
         waypoints: waypts,
-        // optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.WALKING
     }, function (response, status) {
         if (status === google.maps.DirectionsStatus.OK) {

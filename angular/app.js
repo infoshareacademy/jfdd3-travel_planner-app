@@ -21,6 +21,12 @@
         bc.currView = 'Zmień widok';
         //global var for user id token from Google
         var profileId;
+        //url to API
+        var url = 'https://mysterious-taiga-39537.herokuapp.com/api/userData';
+        // array for storing/updating local storage data
+        var savedRoutes;
+        // array holding currently viewed route
+        var routeToSave;;
 
 
         window.gmapReady = function(){
@@ -169,15 +175,18 @@
                 });
 
                 /*    save route to local storage */
-                saveToLocalStorage()
+                saveToLocalStorage();
+                postToRemoteAPI();
+                getFromRemoteAPI();
+                
 
             }
 
             function saveToLocalStorage() {
                 // array for storing/updating local storage data
-                var savedRoutes = [];
+                savedRoutes = [];
                 // array holding currently viewed route
-                var routeToSave = bc.route;
+                routeToSave = bc.route;
                 // if local storage isn't empty do:
                 if(localStorage.length !== 0) {
                     // parse JSON array of objects to an array
@@ -200,6 +209,36 @@
                 }
             }
 
+
+            // self explanatory...
+            function getFromRemoteAPI() {
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    dataType: 'json',
+                    success: function(result) {
+                        console.info(result);
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+            function postToRemoteAPI() {
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    contentType: 'application/json',
+                    data: JSON.stringify({profileId: 'profileId', route: [routeToSave] }),
+                    success: function(result) {
+                        console.info(result)
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            }
         };
 
         $timeout(function(){
